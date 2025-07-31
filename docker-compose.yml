@@ -1,0 +1,32 @@
+# version: '3.9'
+
+services:
+  wordpress:
+    image: wordpress:6.8.2-php8.1-apache
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wp_db
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_pass
+    depends_on:
+      - db
+    volumes:
+      - ./.srv/wordpress:/var/www/html
+      - ./plugin:/var/www/html/wp-content/plugins
+      - ./theme:/var/www/html/wp-content/themes
+      - ./.srv/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: wp_db
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_pass
+    volumes:
+      - ./.srv/database:/var/lib/mysql
