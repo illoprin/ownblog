@@ -1,6 +1,19 @@
 # version: '3.9'
 
 services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 80:80
+      - 443:443  # if needs https
+    volumes:
+      - ./nginx/nginx.local.conf:/etc/nginx/nginx.conf  # dev nginx config
+      # - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf  # prod nginx config
+      - ./ssl:/etc/nginx/ssl  # папка для SSL (если нужно)
+    depends_on:
+      - wordpress
+
   wordpress:
     image: wordpress:6.8.2-php8.1-apache
     restart: always
