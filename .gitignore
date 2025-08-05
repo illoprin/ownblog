@@ -1,3 +1,5 @@
 /.srv/*
 !/.srv/custom.ini
 /layout
+/theme/illoprinblog/vendor/*
+!/theme/illoprinblog/vendor/bootstrap

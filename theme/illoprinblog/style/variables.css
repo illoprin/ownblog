@@ -1,0 +1,18 @@
+:root {
+  --index: calc(1vh + 1vw);
+  --bg-primary: #0c0c14;
+  --text-primary: #ffffff;
+  --color-primary: #2869be;
+  --color-secondary: #252655;
+  --color-accent: #e1722e;
+  --color-magenta: #eb1893;
+  --border-color: rgba(255, 255, 255, 0.144);
+  --border-radius: 7px;
+  --backdrop-blur: 10px;
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-accent) 10%,
+    var(--color-magenta) 90%
+  );
+  --text-secondary: rgba(255, 255, 255, 0.507);
+}

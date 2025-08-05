@@ -1,0 +1,73 @@
+
+section#hero {
+  overflow: hidden;
+  position: relative;
+}
+
+.hero__gradient_left {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: var(--color-primary);
+  top: 85%;
+  left: 5%;
+  filter: blur(250px);
+  animation: left_gradient 2s;
+}
+
+.hero__gradient_right {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: var(--color-accent);
+  top: 85%;
+  left: 80%;
+  filter: blur(250px);
+  animation: right_gradient 2s;
+}
+
+@keyframes appearing {
+  from {
+    opacity: 0;
+    scale: 2;
+  }
+}
+
+@keyframes right_gradient {
+  from {
+    left: 120%;
+    filter: blur(10px);
+  }
+}
+@keyframes left_gradient {
+  from {
+    left: -50%;
+    filter: blur(10px);
+  }
+}
+
+.hero__contents {
+  width: 50%;
+}
+
+@media screen and (max-width: 950px) {
+  .hero__contents {
+    width: 100%;
+  }
+}
+
+#hero_title {
+  animation: appearing 500ms 300ms both;
+}
+
+#hero_contents p {
+  animation: appearing 500ms 450ms both;
+}
+
+#hero_contents div {
+  animation: appearing 500ms 600ms both;
+}
