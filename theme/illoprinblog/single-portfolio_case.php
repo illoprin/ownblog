@@ -37,13 +37,23 @@ $case_gallery = carbon_get_post_meta(get_the_ID(), 'case_gallery');
             <div class="carousel-item active">
               <img src="<? the_post_thumbnail_url() ?>" class="d-block w-100" alt=".case-media">
             </div>
+
             <!-- Other media -->
+            <? foreach($case_gallery as $media_id):
+              $file_url = wp_get_attachment_url((int)$media_id);
+              $mime_type = get_post_mime_type((int)$media_id);
+            ?>
             <div class="carousel-item">
-              <img src="https://placehold.co/600x400" class="d-block w-100" alt="case-media">
+              <? if (strpos($mime_type, "image/") === 0): ?>
+                <img src="<? echo $file_url ?>" class="d-block w-100" alt="case-media">
+              <? elseif (strpos($mime_type, "video/") === 0): ?>
+                <video controls class="case-media w-100">
+                  <source src="<?php echo esc_url($file_url); ?>" type="<?php echo esc_attr($mime_type); ?>">
+                </video>
+              <? endif ?>
             </div>
-            <div class="carousel-item">
-              <img src="https://placehold.co/600x400" class="d-block w-100" alt="case-media">
-            </div>
+            <? endforeach ?>
+
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#case_carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

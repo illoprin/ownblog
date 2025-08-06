@@ -140,6 +140,18 @@ footer {
   section {
     padding: 0rem 1.5rem !important;
   }
+
+  .carousel-inner {
+    height: 300px !important;
+  }
+  .carousel-inner img {
+    object-fit: contain;
+    height: 300px !important;
+  }
+  .carousel-inner video {
+    object-fit: contain;
+    height: 300px !important;
+  }
 }
 
 h1,
@@ -395,4 +407,17 @@ section.without-animation {
   opacity: 0;
   z-index: 1;
   cursor: pointer;
+}
+
+.carousel-inner {
+  position: relative;
+  height: 500px;
+}
+.carousel-inner img {
+  height: 500px;
+  object-fit: cover;
+}
+.carousel-inner video {
+  height: 500px;
+  object-fit: cover;
 }

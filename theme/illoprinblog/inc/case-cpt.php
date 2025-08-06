@@ -7,12 +7,12 @@ use Carbon_Fields\Container;
 function register_portfolio_case()
 {
   $args = [
+    'labels' => array(
+      'name' => __( 'Кейсы' ),
+      'singular_name' => __( 'Кейс' )
+    ),
     'public' => true,
-    'labels'  => [
-      'name' => "Кейсы",
-      'singular_name' => "Кейс",
-      'archives' => "Портфолио"
-    ],
+    'label'  => "Кейсы",
     'supports' => ['title', 'editor', 'thumbnail'],
     'has_archive' => true,
     'public' => true,
@@ -34,6 +34,9 @@ function register_case_fields()
           Field::make('text', 'tech_name', 'Технология'),
         ]),
       Field::make('media_gallery', 'case_gallery', 'Галерея'),
+      Field::make('checkbox', 'is_featured', "Показывать на главной")
+        ->set_value('yes')
+        ->set_default_value(false)
     ]);
 }
 add_action('carbon_fields_register_fields', 'register_case_fields');

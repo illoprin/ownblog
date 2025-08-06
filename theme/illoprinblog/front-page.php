@@ -83,59 +83,66 @@
 
     <div class="blog-wrapper d-flex gap-3 blog-row">
 
-      <div class="glass-panel p-0">
-        <img class="portfolio-image" src="https://placehold.co/600x400" alt="case-image">
-        <div class="p-3">
-          <div class="service-title">
-            Lorem ipsum dolor sit amet.
-          </div>
-          <div class="case-badge rounded-5 p-1">
-            Сайт на WordPress
-          </div>
-          <div class="service-description mt-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, harum do...
-          </div>
-          <button class="btn-glass mt-3" onclick="handleCaseDetailsButton(1)">
-            Подробнее
-          </button>
-        </div>
-      </div>
+    <!-- Featured cases -->
+    <?php
+    // Get featured cases
+    $featured_cases = get_transient('featured_cases');
+    
+    if (false === $featured_cases) {
+      $featured_cases = new WP_Query([
+        'post_type' => 'portfolio_case',
+        'meta_query' => [
+          [
+            'key' => "is_featured",
+            'value' => 'yes',
+          ],
+        ],
+        'orderby' => 'title',
+        'order' => 'DESC',
+      ]);
+      set_transient('featured_cases', $featured_cases, DAY_IN_SECONDS);
+    }
 
-      <div class="glass-panel p-0">
-        <img class="portfolio-image" src="https://placehold.co/600x400" alt="case-image">
+    if ($featured_cases->have_posts()):
+      while($featured_cases->have_posts()):
+        $featured_cases->the_post();
+        $category = get_the_terms(get_the_ID(), 'case_category')[0] ?? null;
+    ?>
+      <div class="glass-panel p-0 d-flex flex-column">
+        <img
+          class="portfolio-image"
+          src="<? the_post_thumbnail_url() ?>"
+          alt="case-image"
+        >
         <div class="p-3">
           <div class="service-title">
-            Lorem ipsum dolor sit amet.
+            <? the_title() ?>
           </div>
-          <div class="case-badge rounded-5 p-1">
-            Telegram-бот
-          </div>
-          <div class="service-description mt-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, harum do...
-          </div>
-          <button class="btn-glass mt-3" onclick="handleCaseDetailsButton(2)">
-            Подробнее
-          </button>
-        </div>
-      </div>
+          <? if ($category): ?>
+            <div class="case-badge rounded-5 p-1 mt-3">
+              <? echo $category->name ?>
+            </div>
+          <? endif ?>
 
-      <div class="glass-panel p-0">
-        <img class="portfolio-image" src="https://placehold.co/600x400" alt="case-image">
-        <div class="p-3">
-          <div class="service-title">
-            Lorem ipsum dolor sit amet.
-          </div>
-          <div class="case-badge rounded-5 p-1">
-            Веб-приложение
-          </div>
-          <div class="service-description mt-3">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptates, harum do...
-          </div>
-          <button class="btn-glass mt-3" onclick="handleCaseDetailsButton(3)">
+        </div>
+
+        <div class="p-3 mt-auto">
+          <button
+            class="btn-glass"
+            onclick="handleCaseDetailsButton('<? the_permalink() ?>')"
+          >
             Подробнее
           </button>
         </div>
+
       </div>
+      <? endwhile ?>
+    <? else: ?>
+      <h2 class="fs-5 fw-bold">
+        Нет избранных кейсов
+      </h2>
+    <? endif ?>
+
     </div>
 
     <a class="btn-glass btn" href="<? echo get_post_type_archive_link("portfolio_case")?>">
@@ -293,8 +300,8 @@
 </div>
 
 <script>
-  function handleCaseDetailsButton(id) {
-    window.location.href = `case/${id}`;
+  function handleCaseDetailsButton(url) {
+    window.location.href = url;
   }
 </script>
 

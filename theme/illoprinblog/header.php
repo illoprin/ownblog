@@ -18,8 +18,8 @@
 		</a>
 
 		<nav class="navbar d-flex gap-5 align-items-center">
-			<a href="<? echo get_post_type_archive_link("portfolio_case")?>" class="nav-link">Портфолио</a>
-			<a href="<? echo get_post_type_archive_link("post")?>" class="nav-link">Статьи</a>
+			<a href="<? echo get_post_type_archive_link("portfolio_case") ?>" class="nav-link">Портфолио</a>
+			<a href="/articles" class="nav-link">Статьи</a>
 			<a href="/#contacts" class="nav-link">Связаться</a>
 		</nav>
 

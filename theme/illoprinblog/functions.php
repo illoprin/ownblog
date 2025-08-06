@@ -2,6 +2,8 @@
 
 use Carbon_Fields\Carbon_Fields;
 
+add_theme_support('post-thumbnails');
+
 require_once __DIR__ . "/inc/template-enqueue.php";
 
 function illoprinblog_load() {
