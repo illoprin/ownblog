@@ -5,12 +5,22 @@ services:
     image: nginx:latest
     restart: always
     ports:
-      - 80:80
-      - 443:443  # if needs https
+      - "80:80"
+      - "443:443"
     volumes:
-      - ./nginx/nginx.local.conf:/etc/nginx/nginx.conf  # dev nginx config
-      # - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf  # prod nginx config
-      - ./ssl:/etc/nginx/ssl  # папка для SSL (если нужно)
+      - ./nginx/nginx.local.conf:/etc/nginx/nginx.conf
+    profiles: ["local"]
+    
+  nginx-prod:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    profiles: ["prod"]
     depends_on:
       - wordpress
 
