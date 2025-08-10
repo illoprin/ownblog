@@ -1,4 +1,35 @@
-<?php get_header() ?>
+<?php
+
+// Get services
+$services = get_transient('services');
+
+if (false === $services) {
+  $services = new WP_Query([
+    'post_type' => 'service'
+  ]);
+  set_transient('services', $services, DAY_IN_SECONDS);
+}
+
+// Get featured cases
+$featured_cases = get_transient('featured_cases');
+
+if (false === $featured_cases) {
+  $featured_cases = new WP_Query([
+    'post_type' => 'portfolio_case',
+    'meta_query' => [
+      [
+        'key' => "is_featured",
+        'value' => 'yes',
+      ],
+    ],
+    'orderby' => 'title',
+    'order' => 'DESC',
+  ]);
+  set_transient('featured_cases', $featured_cases, DAY_IN_SECONDS);
+}
+
+get_header()
+?>
 
 <main>
   <div class="hero__gradient_left"></div>
@@ -33,46 +64,29 @@
     </h1>
 
     <div class="blog-wrapper d-flex flex-column gap-3">
+
+      <?
+      if ($services->have_posts()):
+        while($services->have_posts()):
+          $services->the_post();
+      ?>
       <div class="glass-panel">
         <span class="service-title">
-          🧩 Нужен сайт под ключ
+          <? the_title() ?>
         </span>
         <span class="service-description">
-          От дизайна и структуры до настройки и загрузки на хостинг. Сайт будет выглядеть современно, работать
-          быстро
-          и корректно на всех устройствах.
+          <? the_content() ?>
         </span>
       </div>
-      <div class="glass-panel">
-        <span class="service-title">
-          🚀 Есть макет — нужна реализация
-        </span>
-        <span class="service-description">
-          Сверстаю сайт точно по Figma-макету, добавлю адаптив, подключу клиенскую логику (форма, слайдеры, фильтры
-          и
-          т.п.), натяну на CMS.
-        </span>
-      </div>
-      <div class="glass-panel">
-        <span class="service-title">
-          📦 Разработка MVP
-        </span>
-        <span class="service-description">
-          Помогу быстро запустить первую версию продукта: сайт, веб-приложение или сервис. Фокус на скорости запуска
-          и
-          минимально нужной функциональности.
-        </span>
-      </div>
-      <div class="glass-panel">
-        <span class="service-title">
-          🛎 Нужно автоматизировать рутину
-        </span>
-        <span class="service-description">
-          Сделаю Telegram-бота, настрою выгрузку данных, автозаполнение или парсинг. Интеграции с CRM, платёжками,
-          API
-          — без лишней головной боли.
-        </span>
-      </div>
+      <?
+      endwhile;
+      else:
+      ?>
+      <h2 class="fs-5 fw-bold">
+        Нет избранных кейсов
+      </h2>
+      <? endif; ?>
+      
     </div>
   </section>
 
@@ -85,23 +99,7 @@
 
     <!-- Featured cases -->
     <?php
-    // Get featured cases
-    $featured_cases = get_transient('featured_cases');
     
-    if (false === $featured_cases) {
-      $featured_cases = new WP_Query([
-        'post_type' => 'portfolio_case',
-        'meta_query' => [
-          [
-            'key' => "is_featured",
-            'value' => 'yes',
-          ],
-        ],
-        'orderby' => 'title',
-        'order' => 'DESC',
-      ]);
-      set_transient('featured_cases', $featured_cases, DAY_IN_SECONDS);
-    }
 
     if ($featured_cases->have_posts()):
       while($featured_cases->have_posts()):

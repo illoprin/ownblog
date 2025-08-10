@@ -7,8 +7,11 @@ add_theme_support('post-thumbnails');
 require_once __DIR__ . "/inc/template-enqueue.php";
 
 function illoprinblog_load() {
-	// add custom post types
+	// Add portfolio case port type
 	require_once __DIR__ . "/inc/case-cpt.php";
+
+	// Add service port type
+	require_once __DIR__ . "/inc/service-cpt.php";
 	
 	// load plugins
 	require_once __DIR__ . "/vendor/autoload.php";
