@@ -12,7 +12,6 @@ function register_portfolio_case()
       'singular_name' => __( 'Кейс' )
     ),
     'public' => true,
-    'label'  => "Кейсы",
     'supports' => ['title', 'editor', 'thumbnail'],
     'has_archive' => true,
     'public' => true,

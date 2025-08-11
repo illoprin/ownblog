@@ -2,10 +2,12 @@
 
 // Get services
 $services = get_transient('services');
-
 if (false === $services) {
   $services = new WP_Query([
-    'post_type' => 'service'
+    'post_type' => 'service',
+    'post_status' => 'publish', // published posts only
+    'posts_per_page' => -1,
+    'no_found_rows' => true // disable pagination to optimize
   ]);
   set_transient('services', $services, DAY_IN_SECONDS);
 }
@@ -70,7 +72,7 @@ get_header()
         while($services->have_posts()):
           $services->the_post();
       ?>
-      <div class="glass-panel">
+      <div class="glass-panel block-appear-animated">
         <span class="service-title">
           <? the_title() ?>
         </span>
@@ -83,7 +85,7 @@ get_header()
       else:
       ?>
       <h2 class="fs-5 fw-bold">
-        Нет избранных кейсов
+        Нет услуг
       </h2>
       <? endif; ?>
       
@@ -106,7 +108,7 @@ get_header()
         $featured_cases->the_post();
         $category = get_the_terms(get_the_ID(), 'case_category')[0] ?? null;
     ?>
-      <div class="glass-panel p-0 d-flex flex-column">
+      <div class="glass-panel block-appear-animated p-0 d-flex flex-column">
         <img
           class="portfolio-image"
           src="<? the_post_thumbnail_url() ?>"
@@ -162,7 +164,7 @@ get_header()
           Frontend
         </p>
 
-        <div class="glass-panel d-flex gap-3 flex-column">
+        <div class="glass-panel block-appear-animated d-flex gap-3 flex-column">
           <div class="glass-panel-nohover p-3">
             React
           </div>
@@ -183,7 +185,7 @@ get_header()
           Backend
         </p>
 
-        <div class="glass-panel d-flex gap-3 flex-column">
+        <div class="glass-panel block-appear-animated d-flex gap-3 flex-column">
           <div class="glass-panel-nohover p-3">
             WordPress
           </div>
@@ -203,7 +205,7 @@ get_header()
           Databases
         </p>
 
-        <div class="glass-panel d-flex gap-3 flex-column">
+        <div class="glass-panel block-appear-animated d-flex gap-3 flex-column">
           <div class="glass-panel-nohover p-3">
             MongoDB
           </div>
@@ -223,7 +225,7 @@ get_header()
           DevOps
         </p>
 
-        <div class="glass-panel d-flex gap-3 flex-column">
+        <div class="glass-panel block-appear-animated d-flex gap-3 flex-column">
           <div class="glass-panel-nohover p-3">
             Docker
           </div>

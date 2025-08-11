@@ -1,6 +1,6 @@
 <?php
 
-// register cases CPT
+// register service CPT
 function register_service_card()
 {
   $args = [

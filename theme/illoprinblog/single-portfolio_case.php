@@ -35,31 +35,35 @@ $case_gallery = carbon_get_post_meta(get_the_ID(), 'case_gallery');
           <div class="carousel-inner">
             <!-- Post Thumbnail -->
             <div class="carousel-item active">
-              <img src="<? the_post_thumbnail_url() ?>" class="d-block w-100" alt=".case-media">
+              <img src="<? the_post_thumbnail_url() ?>" class="d-block w-100" alt="case-media">
             </div>
 
             <!-- Other media -->
-            <? foreach($case_gallery as $media_id):
+            <? foreach ($case_gallery as $media_id):
               $file_url = wp_get_attachment_url((int)$media_id);
               $mime_type = get_post_mime_type((int)$media_id);
             ?>
-            <div class="carousel-item">
-              <? if (strpos($mime_type, "image/") === 0): ?>
-                <img src="<? echo $file_url ?>" class="d-block w-100" alt="case-media">
-              <? elseif (strpos($mime_type, "video/") === 0): ?>
-                <video controls class="case-media w-100">
-                  <source src="<?php echo esc_url($file_url); ?>" type="<?php echo esc_attr($mime_type); ?>">
-                </video>
-              <? endif ?>
-            </div>
+              <div class="carousel-item">
+                <? if (strpos($mime_type, "image/") === 0): ?>
+                  <img src="<? echo $file_url ?>" class="d-block w-100" alt="case-media">
+                <? elseif (strpos($mime_type, "video/") === 0): ?>
+                  <video controls class="case-media w-100">
+                    <source src="<?php echo esc_url($file_url); ?>" type="<?php echo esc_attr($mime_type); ?>">
+                  </video>
+                <? endif ?>
+              </div>
             <? endforeach ?>
 
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#case_carousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14 8-4 4 4 4" />
+            </svg>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#case_carousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m10 16 4-4-4-4" />
+            </svg>
           </button>
         </div>
       </div>
@@ -75,10 +79,10 @@ $case_gallery = carbon_get_post_meta(get_the_ID(), 'case_gallery');
             <span class="fs-5 fw-bold">
               Стек:
             </span>
-            <? foreach($tech_stack as $tech): ?>
-            <div class="case-badge rounded-5">
-              <? echo $tech["tech_name"] ?>
-            </div>
+            <? foreach ($tech_stack as $tech): ?>
+              <div class="case-badge rounded-5">
+                <? echo $tech["tech_name"] ?>
+              </div>
             <? endforeach ?>
           </div>
         </article>
@@ -87,5 +91,7 @@ $case_gallery = carbon_get_post_meta(get_the_ID(), 'case_gallery');
     </div>
   </section>
 </main>
+
+
 
 <?php get_footer(); ?>
