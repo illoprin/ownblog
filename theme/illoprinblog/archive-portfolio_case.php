@@ -39,8 +39,10 @@
     <div class="mt-3 cases-grid" id="cases">
 
       <!-- Case -->
-      <? while(have_posts()):
-      the_post(); 
+      <?
+      if (have_posts()):
+        while(have_posts()):
+          the_post();
       $categories = get_the_terms(get_the_ID(), "case_category");
       $categories_slugs = $categories ? $categories[0]->slug : "";
       ?>
@@ -67,7 +69,13 @@
           </button>
         </div>
       </div>
-      <? endwhile ?>
+      <? endwhile;
+      else:
+      ?>
+        <h2 class="fs-5 fw-bold">
+          Нет кейсов
+        </h2>
+      <? endif ?>
 
 
 
