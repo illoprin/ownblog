@@ -49,7 +49,7 @@ get_header()
           Привет! Меня зовут <a href="#contacts" class="blog-link">Илья</a>.
           Я — веб-разработчик и дизайнер. Создаю веб-приложения, сайты и визуально выразительные интерфейсы.
         </p>
-        <div class="d-flex gap-3 justify-content-center">
+        <div class="d-flex gap-3 justify-content-center mt-3">
           <a href="#contacts" class="btn-glass">Связаться</a>
           <a href="#info" class="btn-glass">Узнать больше</a>
         </div>
