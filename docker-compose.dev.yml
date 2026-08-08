@@ -29,10 +29,12 @@ services:
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
     volumes:
-      # Монтируем отдельные папки для кастомизации в локальную директорию ./wp-content
+      # wp-content (themes, uploads, plugins)
       - ./wp-content/themes:/var/www/html/wp-content/themes
       - ./wp-content/plugins:/var/www/html/wp-content/plugins
       - ./wp-content/uploads:/var/www/html/wp-content/uploads
+      # max file size definition
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - wp_network
 

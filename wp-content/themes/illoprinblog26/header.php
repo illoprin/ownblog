@@ -1,59 +1,62 @@
-<?php
-/**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package illoprinblog26
- */
-
-?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
+<html <? language_attributes() ?>>
 
-	<?php wp_head(); ?>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <title>Илья — веб-разработчик | От идеи к готовому решению</title>
+  
+  <? wp_head() ?>
+
 </head>
 
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'illoprinblog26' ); ?></a>
+<body <? body_class() ?>>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$illoprinblog26_description = get_bloginfo( 'description', 'display' );
-			if ( $illoprinblog26_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $illoprinblog26_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+  <!-- ================= BACKGROUND FX ================= -->
+  <div class="bg-fx" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+    <span class="grid-overlay"></span>
+  </div>
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'illoprinblog26' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+  <!-- ================= GO TOP BUTTON ================= -->
+  <a href="#hero" class="to-top" id="toTop" aria-label="Наверх">↑</a>
+
+  <!-- =============== SCROLL PROGRESS BAR =============== -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar"></div>
+  </div>
+
+  <? if (is_front_page()) get_template_part('template-parts/marquee-banner') ?>
+
+  <!-- ================= NAV ================= -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container position-relative">
+      <div class="nav-inner d-flex align-items-center justify-content-between gap-3">
+        <a class="nav-logo font-alt" href="#hero">illoprin<span class="text-accent">.</span></a>
+
+        <ul class="nav-links d-none d-md-flex align-items-center gap-1 list-unstyled m-0">
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#portfolio">Портфолио</a></li>
+          <li><a href="#contact">Связаться</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="#contact" class="btn btn-primary d-none btn-sm d-sm-inline-flex">Обсудить проект</a>
+          <button class="btn btn-ghost btn-sm d-md-none" id="navToggle" aria-label="Меню" aria-expanded="false">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- mobile dropdown -->
+      <div class="nav-mobile glass d-md-none" id="navMobile">
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#contact">Связаться</a>
+      </div>
+    </div>
+  </nav>
+

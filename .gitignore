@@ -4,3 +4,4 @@
 /wp-content/*
 !/wp-content/themes
 /.sketches
+/wp-content/themes/illoprinblog26/vendor

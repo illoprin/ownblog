@@ -56,10 +56,6 @@
   }
 }
 
-@mixin --center {
-  
-}
-
 .grid-overlay {
   position: absolute;
   inset: 0;
