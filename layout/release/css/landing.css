@@ -1,0 +1,237 @@
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.section-hero {
+  padding: 3.5rem 0 4.5rem;
+}
+
+.hero-title {
+  font-size: clamp(2.7rem, 7vw, 4.3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+}
+.hero-typing {
+  font-size: clamp(1.05rem, 3vw, 1.65rem);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+.hero-typing #typing {
+  font-weight: bold;
+  color: var(--primary-300) !important;
+  text-shadow: 0px 5px 30px var(--primary-border);
+}
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-lead {
+  margin: 0 !important;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 34rem;
+}
+.text-lg-start .hero-lead {
+  margin-inline: auto;
+}
+@media (min-width: 992px) {
+  .hero-lead {
+    margin-inline: 0;
+  }
+}
+
+.hero-stats {
+  max-width: 30rem;
+}
+@media (max-width: 991.98px) {
+  .hero-stats {
+    margin-inline: auto;
+  }
+}
+.stat-num {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1;
+}
+.stat-cap {
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  margin-top: 0.3rem;
+}
+
+/* --- avatar + floating badges --- */
+
+.avatar-ring,
+.avatar,
+.avatar img {
+  will-change: transform;
+}
+
+.avatar-wrap {
+  position: relative;
+  width: max(100%, 35vw);
+  aspect-ratio: 1;
+}
+.avatar {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  overflow: visible;
+  padding: 1.5rem;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 0 12px 36px 0 #00000098;
+}
+.avatar-ring {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(45, 144, 207, 0.16),
+    transparent 62%
+  );
+}
+
+.float-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: var(--r-pill);
+  animation: floaty 6s ease-in-out infinite;
+}
+.float-badge img {
+  width: 18px;
+  height: 18px;
+}
+.fb--1 {
+  top: 2%;
+  left: -2%;
+  animation-delay: 0s;
+}
+.fb--2 {
+  top: 22%;
+  right: -6%;
+  animation-delay: -1.2s;
+}
+.fb--3 {
+  bottom: 20%;
+  left: -8%;
+  animation-delay: -2.4s;
+}
+.fb--4 {
+  bottom: 2%;
+  right: 2%;
+  animation-delay: -3.6s;
+}
+.fb--5 {
+  top: 52%;
+  left: -12%;
+  animation-delay: -4.8s;
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@media (max-width: 575.98px) {
+  .avatar-wrap {
+    width: min(100%, 450px);
+  }
+  .float-badge {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.6rem;
+  }
+  .fb--5 {
+    display: none;
+  }
+}
+
+/* ============================================================
+   SERVICE CARDS
+   ============================================================ */
+
+.svc-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 1.1rem;
+  font-size: 1.5rem;
+  color: var(--primary-300);
+  background: linear-gradient(
+    135deg,
+    rgba(45, 144, 207, 0.22),
+    rgba(225, 124, 51, 0.16)
+  );
+  border: 1px solid rgba(45, 144, 207, 0.32);
+  border-radius: 0.85rem;
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s,
+    transform 0.3s ease;
+}
+.svc-card:hover .svc-icon {
+  color: var(--accent-300);
+  transform: scale(1.1) rotate(-8deg);
+}
+
+.svc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.svc-tags li {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.65rem;
+  color: var(--text-mute);
+  border: 1px solid var(--glass-brd);
+  border-radius: var(--r-pill);
+}
+
+.svc-link i {
+  will-change: transition;
+  transition: transform 0.3s var(--ease);
+}
+.svc-link:hover i {
+  transform: translateX(5px);
+}
+
+.svc-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-border);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+

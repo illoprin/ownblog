@@ -1,0 +1,6 @@
+.env
+/layout/*
+!/layout/release
+/wp-content/*
+!/wp-content/themes
+/.sketches
