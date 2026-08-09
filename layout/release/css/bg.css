@@ -55,11 +55,6 @@
     transform: translate(80px, -110px) scale(1.08);
   }
 }
-
-@mixin --center {
-  
-}
-
 .grid-overlay {
   position: absolute;
   inset: 0;

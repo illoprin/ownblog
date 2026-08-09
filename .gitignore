@@ -1,7 +1,7 @@
 .env
-/layout/*
-!/layout/release
-/wp-content/*
-!/wp-content/themes
-/.sketches
-/wp-content/themes/illoprinblog26/vendor
+layout/*
+wp-content/themes/illoprinblog26/vendor
+wp-content/*
+.sketches
+!layout/release
+!wp-content/themes/illoprinblog26
