@@ -14,7 +14,7 @@ $categories = get_terms([
   <section class="section pb-0">
     <div class="container">
       <p class="glass-crumbs text-start reveal">
-        <a href="<? home_url('/') ?>">Главная</a>
+        <a href="<?= esc_url(home_url('/')) ?>">Главная</a>
         <span class="mx-1">/</span>
         <span class="text-dim">Кейсы</span>
       </p>

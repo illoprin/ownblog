@@ -30,5 +30,5 @@ function lp_parse_case_stat(string $text): array {
   }
 
   return [$text];
-
 }
+

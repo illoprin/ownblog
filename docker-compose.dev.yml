@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
-    container_name: wp_mysql
+    container_name: lp_db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -17,7 +15,7 @@ services:
 
   wordpress:
     image: wordpress:latest
-    container_name: wp_app
+    container_name: lp_wp
     restart: always
     depends_on:
       - db
@@ -28,13 +26,14 @@ services:
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      ENV: dev
     volumes:
       # wp-content (themes, uploads, plugins)
       - ./wp-content/themes:/var/www/html/wp-content/themes
       - ./wp-content/plugins:/var/www/html/wp-content/plugins
       - ./wp-content/uploads:/var/www/html/wp-content/uploads
       # max file size definition
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./wp-content/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - wp_network
 

@@ -3,8 +3,14 @@ layout/*
 .sketches
 !layout/release
 
-/wp-content/*
-!/wp-content/themes/
-/wp-content/themes/*
-!/wp-content/themes/illoprinblog26/
-/wp-content/themes/illoprinblog26/vendor/
+# /wp-content/*
+# !/wp-content/themes/
+# /wp-content/themes/*
+# !/wp-content/themes/illoprinblog26/
+# /wp-content/themes/illoprinblog26/vendor/
+
+/wp-content/plugins
+/wp-content/uploads
+/wp-content/themes
+!/wp-content/themes/illoprinblog26
+/wp-content/themes/illoprinblog26/vendor

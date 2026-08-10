@@ -33,7 +33,7 @@
             Расскажите о своей задаче — отвечу в течение нескольких часов, предложу решение и примерные сроки.
           </p>
 
-          <a class="contact-link" href="#" target="_blank" rel="noopener">
+          <a class="contact-link" href="https://t.me/illoprin" target="_blank" rel="noopener">
             <span class="cl-icon cl-icon--tg">
               <i class="bi bi-telegram"></i>
             </span>
@@ -44,7 +44,7 @@
             <i class="bi bi-arrow-up-right"></i>
           </a>
 
-          <a class="contact-link" href="#" target="_blank" rel="noopener">
+          <a class="contact-link" href="https://kwork.ru/user/illoprin" target="_blank" rel="noopener">
             <span class="cl-icon cl-icon--kw">
               <svg width="16" height="16" viewBox="0 0 24 25" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
@@ -63,13 +63,13 @@
             <i class="bi bi-arrow-up-right"></i>
           </a>
 
-          <button class="contact-link" onclick="clipboardCopy('illoprin@gmail.com')">
+          <button class="contact-link" onclick="clipboardCopy('<?= get_option('admin_email') ?>')">
             <span class="cl-icon cl-icon--ml">
               <i class="bi bi-envelope-fill"></i>
             </span>
             <span class="flex-grow-1">
               <b>E-mail</b>
-              <small>illoprin@gmail.com</small>
+              <small><?= get_option('admin_email') ?></small>
             </span>
             <i class="bi bi-arrow-up-right"></i>
           </button>
@@ -151,7 +151,7 @@
                 <input class="form-check-input" type="checkbox" name="consent" id="fConsent">
                 <label class="form-check-label" for="fConsent">
                   Согласен(на) с
-                  <a href="privacy.html" class="link-primary" target="_blank" rel="noopener">
+                  <a href="<?= esc_url(home_url('/')) ?>" class="link-primary" target="_blank" rel="noopener">
                     политикой конфиденциальности
                   </a>
                 </label>

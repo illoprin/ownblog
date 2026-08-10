@@ -91,6 +91,26 @@ body {
 }
 
 
+
+/* ============================================================
+   ARTICLE 
+   ============================================================ */
+
+article.article-content {
+  color: var(--text-dim);
+  font-size: var(--text-s-dim);
+}
+
+article.article-content p {
+}
+
+article.article-content h1,h2,h3,h4,h5 {
+  color: var(--text);
+  font-size: 1.25rem;
+  margin: 1.66rem 0;
+}
+
+
 /* ============================================================
    TEXT
    ============================================================ */

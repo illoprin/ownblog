@@ -1,0 +1,49 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: lp_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: lp_wp
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "${WP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      ENV: prod
+    volumes:
+      # wp-content (themes, uploads, plugins)
+      - ./wp-content/themes:/var/www/html/wp-content/themes
+      - ./wp-content/plugins:/var/www/html/wp-content/plugins
+      - ./wp-content/uploads:/var/www/html/wp-content/uploads
+      # max file size definition
+      - ./wp-content/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      # robots txt
+      - ./wp-content/robots.txt:/var/www/html/robots.txt
+      # wp config
+      - ./wp-content/wp-config.php:/var/www/html/wp-config.php
+    networks:
+      - wp_network
+
+volumes:
+  db_data:
+
+networks:
+  wp_network:
+    driver: bridge
