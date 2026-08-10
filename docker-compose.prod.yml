@@ -20,16 +20,18 @@ services:
     depends_on:
       - db
     ports:
-      - "${WP_PORT:-8080}:80"
+      - "80"
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      WORDPRESS_CONFIG_EXTRA: |
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_EXTRA_CONFIG: |
         define('DISALLOW_FILE_EDIT', true);
         define('WP_DEBUG', false);
         define('WP_DEBUG_DISPLAY', false);
+        define('FORCE_SSL_ADMIN', true);
       ENV: prod
     volumes:
       # wp-content (themes, uploads, plugins)
@@ -43,8 +45,25 @@ services:
     networks:
       - wp_network
 
+  nginx:
+      image: nginx:alpine
+      container_name: lp_nginx
+      restart: always
+      depends_on:
+        - wordpress
+      ports:
+        - "80:80"
+        - "443:443"
+      volumes:
+        - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+        - /etc/letsencrypt:/etc/letsencrypt:ro
+        - nginx_cache:/var/cache/nginx
+      networks:
+        - wp_network
+
 volumes:
   db_data:
+  nginx_cache:
 
 networks:
   wp_network:

@@ -14,3 +14,5 @@
 /wp-content/themes/*
 !/wp-content/themes/illoprinblog26/
 /wp-content/themes/illoprinblog26/vendor/
+/wp-content/themes/illoprinblog26/node_modules/
+/wp-content/themes/illoprinblog26/assets/dist/*
