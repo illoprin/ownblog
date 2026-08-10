@@ -1,53 +1,3 @@
-const services = [
-  {
-    id: 1,
-    icon: "bi bi-wordpress",
-    title: "WordPress-сайт под ключ",
-    description:
-      "Корпоративные сайты и интернет-магазины на **WooCommerce**. Гибкие поля **ACF**, удобная админка, кастомная тема без «конструкторного» мусора.",
-    tags: ["ACF", "WooCommerce", "Custom theme"],
-  },
-  {
-    id: 2,
-    icon: "bi bi-wrench-adjustable",
-    title: "Доработка и исправление ошибок",
-    description:
-      "Чиню то, что сломалось: конфликты плагинов, белый экран, ошибки после обновления. Дорабатываю чужой код и довожу проекты до рабочего состояния.",
-    tags: ["Debug", "Legacy code", "Hotfix"],
-  },
-  {
-    id: 3,
-    icon: "bi bi-speedometer2",
-    title: "Ускорение и оптимизация",
-    description:
-      "Технический аудит, разгон **PageSpeed** до зелёной зоны, кэширование, оптимизация картинок и запросов, базовое **техническое SEO**.",
-    tags: ["Аудит", "PageSpeed", "SEO-тех"],
-  },
-  {
-    id: 4,
-    icon: "bi bi-hdd-network",
-    title: "Настройка VPS/VDS-сервера",
-    description:
-      "Разворачиваю сервер с нуля: Nginx, PHP-FPM, БД, **SSL**-сертификаты, бэкапы. Переношу сайт на новый хостинг без простоя и потери позиций.",
-    tags: ["SSL", "Nginx", "Перенос сайта"],
-  },
-  {
-    id: 5,
-    icon: "bi bi-braces-asterisk",
-    title: "Веб-приложение на React",
-    description:
-      "SPA и личные кабинеты на **React** + **TypeScript** с состоянием на **MobX**. Чистая архитектура, компонентный подход, адаптив на всех экранах.",
-    tags: ["React", "TypeScript", "MobX"],
-  },
-  {
-    id: 6,
-    icon: "bi bi-hexagon-half",
-    title: "Приложение на Node.js",
-    description:
-      "REST API, телеграм-боты, интеграции и парсеры на **Node.js** + **TypeScript**. Docker, логи, понятная документация к эндпоинтам.",
-    tags: ["Node.js", "TypeScript", "REST API"],
-  },
-];
 
 function parallaxRing() {
   const wrap = document.querySelector(".avatar-wrap");
@@ -100,11 +50,7 @@ function parallaxRing() {
       rafId = requestAnimationFrame(update);
     }
   }
-
-  const handleMouseEnter = () => {
-    isHovering = true;
-  }
-
+  
   const update = () => {
     // Линейная интерполяция для плавного "довода" до цели
     const ease = 0.08;
@@ -137,26 +83,6 @@ function parallaxRing() {
 
 /* ---------- Render Сервисы ---------- */
 function initServices() {
-
-  const template = $("template#service-item");
-  const container = $("#service-container");
-
-  services.forEach((item) => {
-    const node = template.content.cloneNode(true);
-
-    // icon
-    $(".svc-icon", node).innerHTML = `<i class="${item.icon}"></i>`;
-    // title
-    $("#svc-title", node).textContent = item.title;
-    // body
-    $("#svc-body", node).innerHTML = marked.parseInline(item.description);
-    // tags
-    $("ul#svc-tags", node).innerHTML = item.tags
-      .map((t) => `<div class="badge badge-accent font-alt">${t}</div>`)
-      .join("");
-
-    container.appendChild(node);
-  });
 
   // предзаполнение темы заявки при клике на "Обсудить"
   document.querySelectorAll('.svc-link').forEach(link => {
@@ -248,6 +174,5 @@ const initTyping = () => {
 document.addEventListener("DOMContentLoaded", () => {
   parallaxRing();
   initServices();
-  initPortfolio();
   initTyping();
 });
