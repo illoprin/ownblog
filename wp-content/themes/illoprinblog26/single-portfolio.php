@@ -110,9 +110,12 @@ while (have_posts()):
               <?
               $first = $gallery_data[0];
               if ($first['is_video']) : ?>
-                <video src="<? echo esc_url($first['src']); ?>" controls playsinline></video>
+                <video
+                  src="<?= esc_url($first['src']); ?>" controls playsinline></video>
               <? else : ?>
-                <img src="<? echo esc_url($first['src']); ?>" alt="<? echo esc_attr($first['alt']); ?>" loading="eager" />
+                <img
+                  src="<?= esc_url($first['src']); ?>"
+                  alt="<?= esc_attr($first['alt']); ?>" loading="eager" />
               <? endif; ?>
               <span class="zoom-hint"><i class="bi bi-arrows-angle-expand"></i></span>
             </div>
@@ -121,12 +124,14 @@ while (have_posts()):
             <div class="gallery-thumbs" id="case-gallery-thumbs">
               <? foreach ($gallery_data as $index => $media) : ?>
                 <button type="button"
-                  class="gallery-thumb <? echo $media['is_video'] ? 'is-video' : ''; ?> <? echo $index === 0 ? 'is-active' : ''; ?>"
+                  class="gallery-thumb <? echo $media['is_video'] ? 'is-video' : ''; ?> <?= $index === 0 ? 'is-active' : ''; ?>"
                   data-index="<? echo $index; ?>">
                   <? if ($media['is_video']) : ?>
                     <video src="<? echo esc_url($media['src']); ?>" muted playsinline preload="metadata"></video>
                   <? else : ?>
-                    <img src="<? echo esc_url($media['thumb']); ?>" alt="<? echo esc_attr($media['alt']); ?>" loading="lazy" />
+                    <img
+                      src="<?= esc_url($media['thumb']); ?>"
+                      alt="<?= esc_attr($media['alt']); ?>" loading="lazy" />
                   <? endif; ?>
                 </button>
               <? endforeach; ?>

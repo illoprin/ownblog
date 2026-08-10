@@ -1,5 +1,3 @@
-
-
 function initPortfolioGallery() {
   const mediaList = window.portfolioMedia || [];
   if (!mediaList.length) return;
@@ -65,24 +63,103 @@ function initPortfolioGallery() {
     });
   });
 
-  // Клики для главного изображения и Лайтбокса
+  // open gallery lightbox
   mainEl.addEventListener("click", () => openLightbox(activeIndex));
 
+  // gallery lightbox elements
   const closeBtn = document.getElementById("lightboxClose");
   const prevBtn = document.getElementById("lightboxPrev");
   const nextBtn = document.getElementById("lightboxNext");
 
+  // gallery lightbox events
   if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
   if (prevBtn) prevBtn.addEventListener("click", () => step(-1));
   if (nextBtn) nextBtn.addEventListener("click", () => step(1));
 
-  // Клавиатура
+  // gallery lightbox key input
   document.addEventListener("keydown", (e) => {
     if (!lightbox.classList.contains("is-open")) return;
     if (e.key === "Escape") closeLightbox();
     if (e.key === "ArrowLeft") step(-1);
     if (e.key === "ArrowRight") step(1);
   });
+
+  // gallery lightbox swipe input
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+  let pointerCurrentX = 0;
+  let isDragging = false;
+  let dragDirectionLocked = null; // 'x' | 'y' | null
+  
+  // минимальная дистанция свайпа в px, чтобы сработало
+  const SWIPE_THRESHOLD = 50; 
+  // после скольких px определяем направление жеста
+  const DIRECTION_LOCK_THRESHOLD = 10;
+
+  const onPointerDown = (e) => {
+    const currentItem = mediaList[activeIndex];
+    if (currentItem.is_video) return; // не свайпаем видео, чтобы не мешать управлению
+
+    // свайпаем только основным указателем (палец / левая кнопка мыши)
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+
+    isDragging = true;
+    dragDirectionLocked = null;
+    pointerStartX = pointerCurrentX = e.clientX;
+    pointerStartY = e.clientY;
+
+    lightboxContent.classList.add("is-dragging");
+  };
+
+  const onPointerMove = (e) => {
+    if (!isDragging) return;
+
+    pointerCurrentX = e.clientX;
+    const deltaX = pointerCurrentX - pointerStartX;
+    const deltaY = e.clientY - pointerStartY;
+
+    // определяем направление жеста один раз, чтобы не путать свайп со скроллом
+    if (!dragDirectionLocked) {
+      if (
+        Math.abs(deltaX) > DIRECTION_LOCK_THRESHOLD ||
+        Math.abs(deltaY) > DIRECTION_LOCK_THRESHOLD
+      ) {
+        dragDirectionLocked = Math.abs(deltaX) > Math.abs(deltaY) ? "x" : "y";
+      }
+    }
+
+    // если жест горизонтальный — блокируем скролл страницы и двигаем контент за пальцем
+    if (dragDirectionLocked === "x") {
+      e.preventDefault();
+      lightboxContent.style.transform = `translateX(${deltaX}px)`;
+    }
+  };
+
+  const onPointerUp = (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    lightboxContent.classList.remove("is-dragging");
+
+    const deltaX = pointerCurrentX - pointerStartX;
+
+    // возвращаем контент на место (transition добавлен в CSS через .is-dragging off)
+    lightboxContent.style.transform = "";
+
+    if (dragDirectionLocked === "x" && Math.abs(deltaX) > SWIPE_THRESHOLD) {
+      // свайп вправо -> предыдущее, влево -> следующее
+      step(deltaX > 0 ? -1 : 1);
+    }
+
+    dragDirectionLocked = null;
+  };
+
+  lightboxContent.addEventListener("pointerdown", onPointerDown);
+  lightboxContent.addEventListener("pointermove", onPointerMove, {
+    passive: false,
+  });
+  lightboxContent.addEventListener("pointerup", onPointerUp);
+  lightboxContent.addEventListener("pointercancel", onPointerUp);
+  lightboxContent.addEventListener("pointerleave", onPointerUp);
 }
 
 function initParallax() {
@@ -129,65 +206,6 @@ function initParallax() {
   // Применяем состояние сразу при инициализации
   // (на случай, если страница открыта не с самого верха)
   update();
-}
-/* ---------- форма заявки (как на лендинге) ---------- */
-
-function initCaseForm() {
-  const form = document.forms.lead;
-  if (!form) return;
-
-  const fields = $$("input,textarea", form);
-  const success = $("#lead-success");
-
-  fields.forEach((f) =>
-    f.addEventListener("input", () => {
-      if (f.classList.contains("is-invalid")) f.classList.remove("is-invalid");
-    })
-  );
-
-  const validate = () => {
-    let ok = true;
-    if (form.name.value.length < 3) {
-      ok = false;
-      form.name.classList.add("is-invalid");
-    }
-    if (form.contact.value.length < 3) {
-      ok = false;
-      form.contact.classList.add("is-invalid");
-    }
-    if (form.task.value.length < 10) {
-      ok = false;
-      form.task.classList.add("is-invalid");
-    }
-    if (!form.consent.checked) {
-      ok = false;
-      form.consent.classList.add("is-invalid");
-    }
-    return ok;
-  };
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-
-    const btn = $("button[type=submit]", form);
-    const original = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML =
-      '<span class="spinner-border spinner-border-sm me-2"></span>Отправляем…';
-
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = original;
-      form.reset();
-      success.classList.remove("d-none");
-      success.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "center",
-      });
-      setTimeout(() => success.classList.add("d-none"), 5000);
-    }, 900);
-  });
 }
 
 /* ---------- init ---------- */

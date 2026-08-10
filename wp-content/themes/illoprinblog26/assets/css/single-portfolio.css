@@ -117,6 +117,21 @@
   animation-delay: .75s;
 } */
 
+/* gallery */
+
+#case-lightbox-content {
+  touch-action: pan-y; /* разрешаем вертикальный скролл, но горизонтальный берём под контроль сами */
+  transition: transform 0.25s ease;
+  user-select: none;
+}
+
+#case-lightbox-content.is-dragging {
+  transition: none; /* во время драга — без анимации, чтобы двигалось строго за пальцем */
+}
+
+#case-lightbox-content img {
+  pointer-events: none; /* чтобы клик/драг не спотыкался о встроенные жесты img или video controls */
+}
 
 /* ---------- STATS ---------- */
 
