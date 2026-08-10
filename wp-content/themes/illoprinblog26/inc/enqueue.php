@@ -42,12 +42,6 @@ function lp_enqueue_style() {
 }
 
 function lp_enqueue_scripts() {
-  // external libs
-  wp_enqueue_script(
-    'marked',
-    get_template_directory_uri() . '/assets/js/lib/marked.js'
-  );
-
   // illoprin lib
   wp_enqueue_script(
     'reveal-on-scroll',

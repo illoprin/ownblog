@@ -37,5 +37,5 @@ function initScrollBar(containerName = '.scroll-progress-container', barClass = 
     } else {
       container.classList.remove('visible');
     }
-  });
+  }, { passive: true });
 }

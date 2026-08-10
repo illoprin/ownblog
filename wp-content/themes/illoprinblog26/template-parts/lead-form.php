@@ -151,7 +151,7 @@
                 <input class="form-check-input" type="checkbox" name="consent" id="fConsent">
                 <label class="form-check-label" for="fConsent">
                   Согласен(на) с
-                  <a href="<?= esc_url(home_url('/')) ?>" class="link-primary" target="_blank" rel="noopener">
+                  <a href="<?= esc_url(home_url('/privacy')) ?>" class="link-primary" target="_blank" rel="noopener">
                     политикой конфиденциальности
                   </a>
                 </label>

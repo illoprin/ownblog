@@ -7,7 +7,7 @@ get_header();
   <!-- ================= HERO ================= -->
   <section class="section-hero" id="hero">
     <div class="container">
-      <div class="row align-items-center g-5 flex-column-reverse flex-lg-row">
+      <div class="row align-items-center g-5 flex-column flex-lg-row">
         <!-- left -->
         <div class="col-12 col-lg-6 text-center text-lg-start">
           <span class="pill reveal glass"><span class="dot"></span>Свободен для новых проектов
@@ -58,7 +58,7 @@ get_header();
           <div class="avatar-wrap mx-auto reveal">
             <div class="avatar-ring"></div>
             <div class="avatar glass">
-              <img src="<?= get_template_directory_uri() . '/assets/static/avatar.jpg' ?>" alt="Илья — веб-разработчик" loading="lazy" />
+              <img src="<?= get_template_directory_uri() . '/assets/static/avatar.webp' ?>" alt="Илья — веб-разработчик" loading="lazy" />
             </div>
 
             <span class="float-badge glass fb--1"><img

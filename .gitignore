@@ -1,16 +1,16 @@
+# Окружение и черновики
 .env
-layout/*
-.sketches
-!layout/release
+/.sketches/
 
-# /wp-content/*
-# !/wp-content/themes/
-# /wp-content/themes/*
-# !/wp-content/themes/illoprinblog26/
-# /wp-content/themes/illoprinblog26/vendor/
+# Исключения для папки layout
+/layout/*
+!/layout/release/
 
-/wp-content/plugins
-/wp-content/uploads
-/wp-content/themes
-!/wp-content/themes/illoprinblog26
-/wp-content/themes/illoprinblog26/vendor
+# WordPress - игнорируем системные папки
+/wp-content/plugins/
+/wp-content/uploads/
+
+# WordPress - правильный подход к теме
+/wp-content/themes/*
+!/wp-content/themes/illoprinblog26/
+/wp-content/themes/illoprinblog26/vendor/

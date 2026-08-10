@@ -26,6 +26,10 @@ services:
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_DEBUG', false);
+        define('WP_DEBUG_DISPLAY', false);
       ENV: prod
     volumes:
       # wp-content (themes, uploads, plugins)
@@ -36,8 +40,6 @@ services:
       - ./wp-content/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       # robots txt
       - ./wp-content/robots.txt:/var/www/html/robots.txt
-      # wp config
-      - ./wp-content/wp-config.php:/var/www/html/wp-config.php
     networks:
       - wp_network
 
