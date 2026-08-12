@@ -11,7 +11,14 @@ function lp_asset_version($relative_path) {
 
 function lp_enqueue_style() {
 
-  // master styles
+  // fonts
+  wp_enqueue_style(
+    'main-style',
+    get_template_directory_uri() . '/style.css',
+    array(),
+    lp_asset_version('/style.css')
+  );
+
   wp_enqueue_style(
     'bootstrap',
     get_template_directory_uri() . '/assets/dist/css/bootstrap.min.css',
