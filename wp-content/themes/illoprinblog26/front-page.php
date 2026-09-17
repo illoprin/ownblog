@@ -39,11 +39,11 @@ get_header();
 
           <div class="row row-cols-3 g-3 mt-4 hero-stats reveal">
             <div class="col">
-              <div class="stat-num font-alt text-accent">5+</div>
+              <div class="stat-num font-alt text-accent">3+</div>
               <div class="stat-cap">лет в разработке</div>
             </div>
             <div class="col">
-              <div class="stat-num font-alt text-accent">60+</div>
+              <div class="stat-num font-alt text-accent">35+</div>
               <div class="stat-cap">сданных проектов</div>
             </div>
             <div class="col">
