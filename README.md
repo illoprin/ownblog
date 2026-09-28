@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/illoprin/ownblog/refs/heads/master/img/Lead.webp" alt="Project Preview" width="100%">
+  <img src="./img/Hero.jpg" alt="Project Preview" width="100%">
 </p>
 
 ---
