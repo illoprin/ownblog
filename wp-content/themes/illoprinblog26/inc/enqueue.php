@@ -75,19 +75,28 @@ function lp_enqueue_scripts() {
     'reveal-on-scroll',
     get_template_directory_uri() . '/assets/src/js/RevealOnScroll.js',
     array(),
-    lp_asset_version('/assets/src/js/RevealOnScroll.js')
+    lp_asset_version('/assets/src/js/RevealOnScroll.js'),
+    array(
+      'strategy' => 'defer'
+    )
   );
   wp_enqueue_script(
     'scroll-bar',
     get_template_directory_uri() . '/assets/src/js/ScrollBar.js',
     array(),
-    lp_asset_version('/assets/src/js/ScrollBar.js')
+    lp_asset_version('/assets/src/js/ScrollBar.js'),
+    array(
+      'strategy' => 'defer'
+    )
   );
   wp_enqueue_script(
     'toast',
     get_template_directory_uri() . '/assets/src/js/ToastShow.js',
     array(),
-    lp_asset_version('/assets/src/js/ToastShow.js')
+    lp_asset_version('/assets/src/js/ToastShow.js'),
+    array(
+      'strategy' => 'defer'
+    )
   );
 
   // main js
@@ -98,6 +107,8 @@ function lp_enqueue_scripts() {
     lp_asset_version('/assets/src/js/main.js'),
     array(
       'in_footer' => true,
+      'strategy' => 'defer'
+
     )
   );
 
@@ -107,7 +118,10 @@ function lp_enqueue_scripts() {
       'typing-effect',
       get_template_directory_uri() . '/assets/src/js/TypingEffect.js',
       array(),
-      lp_asset_version('/assets/src/js/TypingEffect.js')
+      lp_asset_version('/assets/src/js/TypingEffect.js'),
+      array(
+        'strategy' => 'defer'
+      )
     );
     wp_enqueue_script(
       'front-page-js',
@@ -151,6 +165,7 @@ function lp_enqueue_scripts() {
     lp_asset_version('/assets/src/js/spotlight.js'),
     array(
       'in_footer' => true,
+      'strategy' => 'defer',
     )
   );
   wp_enqueue_script(
@@ -160,6 +175,7 @@ function lp_enqueue_scripts() {
     lp_asset_version('/assets/src/js/tilt.js'),
     array(
       'in_footer' => true,
+      'strategy' => 'defer',
     )
   );
 }

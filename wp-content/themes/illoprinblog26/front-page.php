@@ -1,5 +1,8 @@
 <?
 get_header();
+
+$count = wp_count_posts('portfolio')->publish;
+$count = wp_count_posts('portfolio')->publish;
 ?>
 
 <main id="top">
@@ -39,12 +42,12 @@ get_header();
 
           <div class="row row-cols-3 g-3 mt-4 hero-stats reveal">
             <div class="col">
-              <div class="stat-num font-alt text-accent">3+</div>
-              <div class="stat-cap">лет в разработке</div>
+              <div class="stat-num font-alt text-accent">5.0 ★</div>
+              <div class="stat-cap">рейтинг Kwork</div>
             </div>
             <div class="col">
-              <div class="stat-num font-alt text-accent">35+</div>
-              <div class="stat-cap">сданных проектов</div>
+              <div class="stat-num font-alt text-accent"><?= $count ?></div>
+              <div class="stat-cap">кейсов портфолио</div>
             </div>
             <div class="col">
               <div class="stat-num font-alt text-accent">94</div>
