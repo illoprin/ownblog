@@ -238,3 +238,121 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.09);
 }
 
+/* ============================================================
+   WORKFLOW
+   ============================================================ */
+
+.workflow-list {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.workflow-list::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--primary-border) 8%, var(--accent-border) 92%, transparent);
+}
+.workflow-item {
+  position: relative;
+  display: flex;
+  width: calc(50% - 2rem);
+}
+.workflow-item.reveal-left {
+  transform: translateX(-28px);
+}
+.workflow-item.reveal-right {
+  transform: translateX(28px);
+}
+.workflow-item.reveal-left.visible,
+.workflow-item.reveal-right.visible {
+  transform: none;
+}
+@media (max-width: 767.98px) {
+  .workflow-item.reveal-left,
+  .workflow-item.reveal-right {
+    transform: translateX(20px);
+  }
+  .workflow-item.reveal-left.visible,
+  .workflow-item.reveal-right.visible {
+    transform: none;
+  }
+}
+
+.workflow-item:nth-child(odd) {
+  margin-right: auto;
+}
+.workflow-item:nth-child(even) {
+  margin-left: auto;
+}
+.workflow-item::after {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 2px solid var(--primary-300);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 5px var(--primary-bg);
+}
+.workflow-item:nth-child(odd)::after {
+  right: calc(-2rem - 0.4rem);
+}
+.workflow-item:nth-child(even)::after {
+  left: calc(-2rem - 0.4rem);
+}
+.workflow-content {
+  width: 100%;
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.workflow-number {
+  color: var(--accent);
+  font-size: clamp(4rem, 7vw, 2.8rem);
+  line-height: 1;
+}
+.workflow-body > h3 {
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+.workflow-body > p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: var(--text-s-dim);
+  line-height: 1.65;
+  margin-top: .66rem;
+}
+
+@media (max-width: 767.98px) {
+  .workflow-list {
+    gap: 1rem;
+    padding-left: 1.5rem;
+  }
+  .workflow-list::before {
+    left: 0.4rem;
+  }
+  .workflow-item,
+  .workflow-item:nth-child(even),
+  .workflow-item:nth-child(odd) {
+    width: 100%;
+    margin: 0;
+  }
+  .workflow-item:nth-child(even)::after,
+  .workflow-item:nth-child(odd)::after {
+    left: calc(-1.5rem - 0.4rem);
+    right: auto;
+  }
+}
+
+

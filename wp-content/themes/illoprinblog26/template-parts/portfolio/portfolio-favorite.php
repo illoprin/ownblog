@@ -64,6 +64,7 @@ if ($favourite_portfolio->have_posts()) {
         'image_alt'      => $image_alt,
         'stack'          => $stack,
         'stats'          => $stats,
+        'reveal'         => true,
       ]
     );
   }

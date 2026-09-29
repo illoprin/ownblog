@@ -152,6 +152,79 @@ $count = wp_count_posts('portfolio')->publish;
   </section>
 
 
+  <!-- ================= HOW I WORK ================= -->
+  <section id="workflow" class="section">
+    <div class="container">
+      <header class="section-head section-center reveal">
+        <span class="badge badge-primary section-badge">этапы</span>
+        <h2 class="section-title font-alt">
+          Как я <span class="text-grad">работаю</span>
+        </h2>
+        <p class="section-sub">
+          Понятные этапы, согласования и контроль результата — вы всегда знаете, что происходит с проектом.
+        </p>
+      </header>
+
+      <ol class="workflow-list">
+        <li class="workflow-item reveal reveal-left">
+          <div class="workflow-content glass">
+            <span class="fw-bold workflow-number font-alt">01</span>
+            <div class="workflow-body">
+              <h3 class="font-alt">Бриф</h3>
+              <p>
+                Обсуждаем цель сайта и референсы. Отвечаю и присылаю примерную оценку в течение дня.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="workflow-item reveal reveal-right">
+          <div class="workflow-content glass">
+            <span class="fw-bold workflow-number font-alt">02</span>
+            <div class="workflow-body">
+              <h3 class="font-alt">Смета</h3>
+              <p>
+                Фиксирую в тексте, что делаю, за какие деньги и в какой срок.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="workflow-item reveal reveal-left">
+          <div class="workflow-content glass">
+            <span class="fw-bold workflow-number font-alt">03</span>
+            <div class="workflow-body">
+              <h3 class="font-alt">Прототип</h3>
+              <p>
+                Показываю структуру и внешний вид до начала кода.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="workflow-item reveal reveal-right">
+          <div class="workflow-content glass">
+            <span class="fw-bold workflow-number font-alt">04</span>
+            <div class="workflow-body">
+              <h3 class="font-alt">Разработка</h3>
+              <p>
+                Промежуточные показы в коротких видео.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="workflow-item reveal reveal-left">
+          <div class="workflow-content glass">
+            <span class="fw-bold workflow-number font-alt">05</span>
+            <div class="workflow-body">
+              <h3 class="font-alt">Запуск</h3>
+              <p>
+                Размещаю на сервер, передаю доступы и записываю короткую инструкцию.
+              </p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- ================= PORTFOLIO ================= -->
   <section id="portfolio" class="section">
     <div class="container">

@@ -23,7 +23,7 @@ $has_reveal = $args['reveal'] ?? false;
 
 ?>
 
-<div class="pf-col col-12 col-lg-4 <?= $has_reveal ? 'reveal' : '' ?> ?>" data-cat=<?= esc_html($cat_slug) ?>>
+<div class="pf-col col-12 col-lg-4 <?= $has_reveal ? 'reveal' : '' ?>" data-cat=<?= esc_html($cat_slug) ?>>
   <!-- 3d hover effect wrapper -->
   <? if ($has_tilt): ?> <div class="tilt h-100"> <? endif; ?>
 
