@@ -12,7 +12,8 @@ while (have_posts()):
 
   $post_id   = get_the_ID();
   $title     = get_the_title();
-  $lead_text = get_the_excerpt(); // или используйте custom lead если есть
+  
+  $lead_text = get_the_content(); // или используйте custom lead если есть
 
   /* ================= TAXONOMIES ================= */
   // 1. Категория (радио)
@@ -84,7 +85,9 @@ while (have_posts()):
           <h1 class="case-title font-alt reveal"><? echo esc_html($title); ?></h1>
 
           <? if ($lead_text) : ?>
-            <p class="case-lead reveal"><? echo esc_html($lead_text); ?></p>
+            <p class="case-lead reveal">
+              <?= wp_kses_post($lead_text) ?>
+            </p>
           <? endif; ?>
 
           <!-- stack -->

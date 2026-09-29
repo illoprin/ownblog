@@ -62,7 +62,7 @@ $has_reveal = $args['reveal'] ?? false;
 
         <!-- description -->
         <p class="text-dim" id="pf-body">
-          <?= wp_kses_post($desc); ?>
+          <?= wp_trim_words( $desc, 20, '...' ); ; ?>
         </p>
 
         <!-- stack -->
