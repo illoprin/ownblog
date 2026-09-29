@@ -43,7 +43,9 @@ $count = wp_count_posts('portfolio')->publish;
           <div class="row row-cols-3 g-3 mt-4 hero-stats reveal">
             <div class="col">
               <div class="stat-num font-alt text-accent">5.0 ★</div>
-              <div class="stat-cap">рейтинг Kwork</div>
+              <div class="stat-cap">
+              рейтинг <a href="https://kwork.ru/user/illoprin" class="link-primary">Kwork</a>
+              </div>
             </div>
             <div class="col">
               <div class="stat-num font-alt text-accent"><?= $count ?></div>
@@ -237,7 +239,7 @@ $count = wp_count_posts('portfolio')->publish;
           Что уже <span class="text-grad">сделано</span>
         </h2>
         <p class="section-sub">
-          Несколько проектов, где результат можно измерить цифрами.
+          Несколько проектов, где результат можно увидеть вживую.
         </p>
       </header>
 

@@ -184,7 +184,7 @@ while (have_posts()):
         <div class="container">
           <header class="section-head reveal">
             <span class="badge badge-primary section-badge">Результаты</span>
-            <h2 class="section-title font-alt">Что получил <span class="text-grad">клиент</span></h2>
+            <h2 class="section-title font-alt"><span class="text-grad">Результат</span></h2>
           </header>
 
           <div class="case-stats-grid reveal">
