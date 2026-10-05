@@ -84,6 +84,7 @@ services:
 volumes:
   db_data:
   nginx_cache:
+  redis_data:
 
 networks:
   wp_network:
