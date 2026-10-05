@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img src="./img/hero.jpg" alt="Project Preview" width="100%">
+  <img src="./img/Hero.jpg" alt="Project Preview" width="100%">
 </p>
 
 ---
