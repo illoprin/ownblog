@@ -34,10 +34,7 @@ if ($favourite_portfolio->have_posts()) {
     $stack = get_the_terms( $post_id, 'portfolio_stack');
 
     // media 
-    $media = carbon_get_post_meta(
-      $post_id,
-      'media'
-    );
+    $media = carbon_get_post_meta($post_id, 'media');
     $image_url = '';
     $image_alt = get_the_title($post_id);
     if (!empty($media) && is_array($media)) {
@@ -48,6 +45,9 @@ if ($favourite_portfolio->have_posts()) {
         $image_alt = $attachment_alt;
       }
     }
+
+    // links
+    $links = carbon_get_post_meta($post_id, 'project_links');
 
     // stats
     $stats = carbon_get_post_meta( $post_id, 'stats');
@@ -64,6 +64,7 @@ if ($favourite_portfolio->have_posts()) {
         'image_alt'      => $image_alt,
         'stack'          => $stack,
         'stats'          => $stats,
+        'links'          => $links,
         'reveal'         => true,
       ]
     );

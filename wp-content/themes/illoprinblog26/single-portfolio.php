@@ -5,6 +5,26 @@
  * File: single-portfolio.php
  */
 
+function get_portfolio_link_icon($type)
+{
+  $icons = [
+    'github' => 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    'website' => 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/ie10/ie10-original.svg',
+    'figma'  => 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+  ];
+
+  $type = sanitize_key($type);
+
+  if (!isset($icons[$type])) {
+    return '';
+  }
+
+  return sprintf(
+    '<img src="%s" alt="" aria-hidden="true" />',
+    esc_url($icons[$type])
+  );
+}
+
 get_header();
 
 while (have_posts()):
@@ -28,6 +48,7 @@ while (have_posts()):
   $solution_content = carbon_get_post_meta($post_id, 'solution');
   $stats            = carbon_get_post_meta($post_id, 'stats');
   $media_ids        = carbon_get_post_meta($post_id, 'media');
+  $links            = carbon_get_post_meta($post_id, 'project_links');
 
   /* ================= GALLERY PREPARATION ================= */
   $gallery_data = [];
@@ -82,7 +103,9 @@ while (have_posts()):
             <span class="badge badge-accent text-uppercase reveal"><? echo esc_html($category->name); ?></span>
           <? endif; ?>
 
-          <h1 class="case-title font-alt reveal"><? echo esc_html($title); ?></h1>
+          <h1 class="case-title font-alt reveal">
+            <? echo esc_html($title); ?>
+          </h1>
 
           <? if ($lead_text) : ?>
             <p class="case-lead reveal">
@@ -94,9 +117,26 @@ while (have_posts()):
           <? if (!empty($stack_terms) && !is_wp_error($stack_terms)) : ?>
             <div class="case-stack-container mt-3">
               <? foreach ($stack_terms as $term) : ?>
-                <div class="badge badge-stack reveal"><? echo esc_html($term->name); ?></div>
+                <div class="badge badge-stack reveal"><?= esc_html($term->name); ?></div>
               <? endforeach; ?>
             </div>
+          <? endif; ?>
+
+          <!-- links -->
+          <? if (!empty($links) && !is_wp_error($stack_terms)) : ?>
+            <ul class="case-links reveal">
+              <? foreach ($links as $link): ?>
+              <li class="case-link-item">
+                <a
+                  href="<?= esc_url($link['url']) ?>"
+                  <? if ($link['new_tab']) echo 'target="blank_"'; ?> 
+                >
+                  <?= get_portfolio_link_icon($link['type'] ?? '') ?>
+                  <?= esc_html($link['label']) ?>
+                </a>
+              </li>
+              <? endforeach; ?>
+            </ul>
           <? endif; ?>
 
         </div>
@@ -107,6 +147,7 @@ while (have_posts()):
     <? if (!empty($gallery_data)) : ?>
       <section class="section parallax-overlap">
         <div class="container">
+          
           <div class="gallery reveal">
             <!-- Главный слайд -->
             <div class="gallery-main" id="case-gallery-main">

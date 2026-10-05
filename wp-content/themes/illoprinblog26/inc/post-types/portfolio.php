@@ -137,15 +137,49 @@ function lp_register_portfolio_custom_fields() {
     ->where('post_type', '=', 'portfolio')
     ->add_fields([
 
+      // - PROJECT_LINKS
+       Field::make('complex', 'project_links', 'Ссылки на проект')
+      ->set_layout('tabbed-horizontal')
+      ->setup_labels([
+        'plural_name'   => 'ссылки',
+        'singular_name' => 'ссылка',
+      ])
+      ->add_fields([
+
+        Field::make('select', 'type', 'Тип ссылки')
+          ->add_options([
+            'website' => 'Сайт проекта',
+            'github'  => 'GitHub',
+            'figma'   => 'Figma',
+            'other'   => 'Другое',
+          ])
+          ->set_default_value('website'),
+
+        Field::make('text', 'label', 'Текст ссылки')
+          ->set_help_text('Например: Открыть сайт или Смотреть код'),
+
+        Field::make('text', 'url', 'URL')
+          ->set_required(true)
+          ->set_help_text('Полный адрес, включая https://'),
+
+        Field::make('checkbox', 'new_tab', 'Открывать в новой вкладке')
+          ->set_default_value(true),
+      ]),
+
+
+      // - TASK
       Field::make('rich_text', 'task', 'Задача')
         ->set_help_text('Можно использовать **жирный текст** и списки через панель редактора'),
 
+      // - SOLUTION
       Field::make('rich_text', 'solution', 'Решение'),
 
+      // - GALLERY
       Field::make('media_gallery', 'media', 'Медиа-галерея')
         ->set_type(['image', 'video'])
         ->set_help_text('Первый элемент используется как обложка проекта'),
 
+      // - STATS
       Field::make('complex', 'stats', 'Статистика')
         ->add_fields([
           Field::make('text', 'stat_value', 'Показатель')

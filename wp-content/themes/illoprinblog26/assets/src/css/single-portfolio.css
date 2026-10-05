@@ -33,6 +33,70 @@
   margin-bottom: 0;
 }
 
+/* ---------- LINKS ---------- */
+
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  list-style: none;
+}
+
+.case-link-item a {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  padding: 0.75rem 1.1rem;
+  gap: .3rem;
+  border: 1px solid var(--glass-brd);
+  border-radius: var(--r-lg);
+  background: var(--dark-bg);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.case-link-item a:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  box-shadow: 0 10px 24px var(--accent-border);
+
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.case-link-item a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.case-link-item a > img {
+  display: block;
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+
+@media screen and (max-width: 576px) {
+  .case-links {
+    gap: 0.5rem;
+  }
+
+  .case-link-item a {
+    min-height: 3rem;
+    padding: 0.65rem 0.85rem;
+  }
+}
+
 /* ---------- CASE CONTENT PARALLAX ---------- */
 
 .case-content-box {
@@ -73,7 +137,7 @@
 /* stack badge */
 
 .badge-stack {
-  background: var(--dark-bg);
+  background: var(--glass-bg);
   border-color: var(--glass-brd);
   color: var(--text);
   font-size: 0.9rem;

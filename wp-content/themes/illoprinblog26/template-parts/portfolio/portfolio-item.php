@@ -12,6 +12,8 @@ $cat = $args['category_name'] ?? '';
 $cat_slug = $args['category_slug'] ?? '';
 $desc = $args['desc'] ?? '';
 
+$links = $args['links'] ?? array();
+
 $stack = $args['stack'] ?? array();
 $stats = $args['stats'] ?? array();
 
@@ -42,13 +44,25 @@ $has_reveal = $args['reveal'] ?? false;
             loading="lazy" />
         <?php endif; ?>
 
-        <div class="pf-overlay d-none d-lg-flex">
+        <div class="pf-overlay d-none d-lg-flex gap-3">
           <a
             href="<?= esc_url(get_permalink($post_id)); ?>"
             class="btn btn-brand btn-sm font-alt">
             Подробнее
             <i class="bi bi-arrow-up-right"></i>
           </a>
+          
+          <? if(!empty($links)):
+            $link = $links[0];  
+          ?>
+            <a
+              href="<?= esc_url($link['url']) ?>"
+              class="btn btn-primary btn-sm font-alt">
+              <?= esc_html($link['label']) ?>
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+          <? endif; ?>
+
         </div>
       </div>
 

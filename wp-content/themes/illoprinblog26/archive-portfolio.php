@@ -125,6 +125,9 @@ $categories = get_terms([
           // Получаем статистику из Carbon Fields
           $stats = carbon_get_post_meta($post_id, 'stats');
 
+          // Получаем ссылки (project_links)
+          $links = carbon_get_post_meta($post_id, 'project_links');
+
           // Получаем URL изображения (первое изображение из медиа-галереи или thumbnail)
           $media_gallery = carbon_get_post_meta($post_id, 'media');
           $image_url = '';
@@ -145,6 +148,7 @@ $categories = get_terms([
             'category_slug' => $category_slug,
             'desc'          => $desc,
             'stack'         => $stack,
+            'links'         => $links,
             'stats'         => $stats,
             'image_url'     => $image_url,
             'image_alt'     => $image_alt,

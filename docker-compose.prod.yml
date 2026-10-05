@@ -13,7 +13,20 @@ services:
     networks:
       - wp_network
 
+  redis:
+    image: redis:alpine
+    container_name: lp_redis
+    restart: always
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - wp_network
+
   wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile.wp
     image: wordpress:latest
     container_name: lp_wp
     restart: always
@@ -32,6 +45,12 @@ services:
         define('WP_DEBUG', false);
         define('WP_DEBUG_DISPLAY', false);
         define('FORCE_SSL_ADMIN', true);
+
+        /* Redis */
+        define('WP_REDIS_HOST', 'redis');
+        define('WP_REDIS_PORT', 6309); // 'redis:6379'
+        define('WP_REDIS_SELECTIVE_FLUSH', true);
+        define( 'WP_REDIS_MAXTTL', 86400 ); 
       ENV: prod
     volumes:
       # wp-content (themes, uploads, plugins)

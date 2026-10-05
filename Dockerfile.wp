@@ -1,0 +1,4 @@
+FROM wordpress:latest
+
+# install and active Redis extension for PHP
+RUN pecl install redis && docker-php-ext-enable redis
