@@ -1,3 +1,30 @@
+const workflowItems = [
+  {
+    title: "Бриф",
+    term: "(1-2 дня)",
+    body: "Обсуждаем цель сайта и референсы. Отвечаю и присылаю примерную оценку.",
+  },
+  {
+    title: "Смета",
+    term: "(1-2 дня)",
+    body: "Фиксирую, что делаю, за какие деньги и в какой срок.",
+  },
+  {
+    title: "Прототип",
+    term: "(1 день)",
+    body: "Показываю структуру и внешний вид до начала разработки.",
+  },
+  {
+    title: "Разработка",
+    term: "(3-4 дня)",
+    body: "Разрабатываю сайт и присылаю промежуточные показы в коротких видео.",
+  },
+  {
+    title: "Запуск",
+    term: "(1-2 дня)",
+    body: "Размещаю сайт на сервере, передаю доступы и записываю короткую инструкцию.",
+  },
+];
 
 function parallaxRing() {
   const wrap = document.querySelector(".avatar-wrap");
@@ -24,7 +51,6 @@ function parallaxRing() {
   let isHovering = false;
 
   const handleMouseMove = (e) => {
-
     const rect = wrap.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
@@ -40,7 +66,7 @@ function parallaxRing() {
     if (!rafId) {
       rafId = requestAnimationFrame(update);
     }
-  }
+  };
 
   function handleMouseLeave() {
     isHovering = false;
@@ -50,7 +76,7 @@ function parallaxRing() {
       rafId = requestAnimationFrame(update);
     }
   }
-  
+
   const update = () => {
     // Линейная интерполяция для плавного "довода" до цели
     const ease = 0.08;
@@ -72,10 +98,10 @@ function parallaxRing() {
     } else {
       rafId = null;
     }
-  }
+  };
 
   // Слушаем движение мыши по секции hero
-  const hero = $('section#hero');
+  const hero = $("section#hero");
   hero.addEventListener("mousemove", handleMouseMove);
   // hero.addEventListener("mouseenter", handleMouseEnter);
   hero.addEventListener("mouseleave", handleMouseLeave);
@@ -83,12 +109,11 @@ function parallaxRing() {
 
 /* ---------- Render Сервисы ---------- */
 function initServices() {
-
   // предзаполнение темы заявки при клике на "Обсудить"
-  document.querySelectorAll('.svc-link').forEach(link => {
-    link.addEventListener('click', (e) => {
+  document.querySelectorAll(".svc-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      const title = $('#svc-title', link.closest('.card')).textContent.trim();
+      const title = $("#svc-title", link.closest(".card")).textContent.trim();
       const message = document.forms.lead.task;
       if (!title || message.value) return;
       message.value = `Здравствуйте! Интересует услуга: ${title}. `;
@@ -127,7 +152,7 @@ function initPortfolio() {
 
       // links
       $$("a", node).forEach((a) =>
-        a.setAttribute("href", `case.html?id=${item.id}`)
+        a.setAttribute("href", `case.html?id=${item.id}`),
       );
 
       // stack
@@ -140,7 +165,7 @@ function initPortfolio() {
       stats.replaceChildren();
       stats.innerHTML = item.stats
         .map(
-          (s) => ` <span class="pf-stat-item">${marked.parseInline(s)}</span>`
+          (s) => ` <span class="pf-stat-item">${marked.parseInline(s)}</span>`,
         )
         .join("");
 
@@ -170,9 +195,34 @@ const initTyping = () => {
   });
 };
 
+function initWorkflow() {
+  const list = document.querySelector("ol.workflow-list");
+  const template = document.querySelector("#workflow_item");
+
+  if (!list || !template) return;
+
+  list.replaceChildren(
+    ...workflowItems.map((step, index) => {
+      const item = template.content.firstElementChild.cloneNode(true);
+
+      item.classList.remove("reveal-left", "reveal-right");
+      item.classList.add(index % 2 === 0 ? "reveal-left" : "reveal-right");
+      item.querySelector(".workflow-number").textContent = String(
+        index + 1,
+      ).padStart(2, "0");
+      item.querySelector(".workflow-title").textContent = step.title;
+      item.querySelector(".workflow-term").textContent = step.term;
+      item.querySelector(".workflow-description").textContent = step.body;
+
+      return item;
+    }),
+  );
+}
+
 /* ---------- init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   parallaxRing();
   initServices();
+  initWorkflow();
   initTyping();
 });

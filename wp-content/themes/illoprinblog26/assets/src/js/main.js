@@ -8,7 +8,7 @@ const reduceMotion = window.matchMedia(
 /* ---------- Marquee: дублируем содержимое для бесшовной прокрутки ---------- */
 const initMarquees = () => {
   $$(".marquee-track").forEach((track) => {
-    track.innerHTML += track.innerHTML; // 2 копии → translateX(-50%) бесшовен
+    track.innerHTML += track.innerHTML + track.innerHTML; // 2 копии → translateX(-50%) бесшовен
     track.setAttribute("aria-hidden", "false");
   });
 };

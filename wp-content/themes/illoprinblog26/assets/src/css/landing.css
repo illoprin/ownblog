@@ -99,7 +99,7 @@
   object-fit: cover;
   border-radius: 50%;
   display: block;
-  box-shadow: 0 12px 36px 0 #00000098;
+  /* box-shadow: 0 12px 36px 0 #00000098; */
   filter: grayscale(1.0);
 }
 
@@ -246,7 +246,7 @@
   position: relative;
   display: grid;
   gap: 1.5rem;
-  max-width: 900px;
+  max-width: 90vw;
   margin: 0 auto;
   padding: 0;
   list-style: none;
@@ -265,6 +265,20 @@
   display: flex;
   width: calc(50% - 2rem);
 }
+
+.workflow-item-header {
+  display: flex;
+  width: 100%;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+.workflow-item-header span {
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
 .workflow-item.reveal-left {
   transform: translateX(-28px);
 }
@@ -334,7 +348,7 @@
   margin-top: .66rem;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 950px) {
   .workflow-list {
     gap: 1rem;
     padding-left: 1.5rem;

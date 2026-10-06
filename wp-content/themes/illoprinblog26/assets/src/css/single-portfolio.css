@@ -52,7 +52,7 @@
   gap: .3rem;
   border: 1px solid var(--glass-brd);
   border-radius: var(--r-lg);
-  background: var(--dark-bg);
+  background: none;
   color: var(--text);
   text-decoration: none;
   transition:
@@ -66,7 +66,6 @@
   transform: translateY(-3px);
   border-color: var(--accent);
   background: var(--accent-bg);
-  box-shadow: 0 10px 24px var(--accent-border);
 
   text-decoration: underline;
   color: var(--accent);
@@ -137,7 +136,7 @@
 /* stack badge */
 
 .badge-stack {
-  background: var(--glass-bg);
+  background: var(--dark-bg);
   border-color: var(--glass-brd);
   color: var(--text);
   font-size: 0.9rem;

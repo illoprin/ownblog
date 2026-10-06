@@ -41,6 +41,8 @@ services:
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
       WORDPRESS_TABLE_PREFIX: wp_
+      WP_REDIS_HOST: redis
+      WP_REDIS_PORT: 6379
       WORDPRESS_EXTRA_CONFIG: |
         define('DISALLOW_FILE_EDIT', true);
         define('WP_DEBUG', false);
@@ -49,9 +51,9 @@ services:
 
         /* Redis */
         define('WP_REDIS_HOST', 'redis');
-        define('WP_REDIS_PORT', 6309); // 'redis:6379'
+        define('WP_REDIS_PORT', 6379); // 'redis:6379'
         define('WP_REDIS_SELECTIVE_FLUSH', true);
-        define( 'WP_REDIS_MAXTTL', 86400 ); 
+        define( 'WP_REDIS_MAXTTL', 86400 );
       ENV: prod
     volumes:
       # wp-content (themes, uploads, plugins)
