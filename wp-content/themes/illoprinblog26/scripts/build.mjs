@@ -1,12 +1,14 @@
-import esbuild from 'esbuild';
-import fg from 'fast-glob';
-import path from 'node:path';
-import fs from 'node:fs/promises';
+import esbuild from "esbuild";
+import fg from "fast-glob";
+import path from "node:path";
+import fs from "node:fs/promises";
+import chokidar from "chokidar";
+import { BuildBootstrap } from "./build-bootstrap.mjs";
 
-const SRC_DIR = 'assets/src';
-const DIST_DIR = 'assets/dist';
+const SRC_DIR = "assets/src";
+const DIST_DIR = "assets/dist";
 
-const isWatch = process.argv.includes('--watch');
+const isWatch = process.argv.includes("--watch");
 
 function isAlreadyMinified(file) {
   // например: bootstrap.min.css, jquery.min.js
@@ -14,13 +16,15 @@ function isAlreadyMinified(file) {
 }
 
 async function run() {
+  await BuildBootstrap();
+
   const jsFiles = await fg(`${SRC_DIR}/**/*.js`);
   const cssFiles = await fg(`${SRC_DIR}/**/*.css`);
 
   const allFiles = [...jsFiles, ...cssFiles];
 
   if (allFiles.length === 0) {
-    console.warn('No .js or .css files found in', SRC_DIR);
+    console.warn("No .js or .css files found in", SRC_DIR);
     return;
   }
 
@@ -41,18 +45,45 @@ async function run() {
   // Собираем контексты для остальных
   const contexts = await Promise.all(
     toMinify.map((file) =>
-      file.endsWith('.js') ? buildJsContext(file) : buildCssContext(file)
-    )
+      file.endsWith(".js") ? buildJsContext(file) : buildCssContext(file),
+    ),
   );
 
   if (isWatch) {
     await Promise.all(contexts.map((ctx) => ctx.watch()));
-    console.log('Watching for changes... (already-minified files are copied once, not watched)');
+    watchBootstrapContent();
+    console.log(
+      "Watching for changes... (already-minified files are copied once, not watched)",
+    );
   } else {
     await Promise.all(contexts.map((ctx) => ctx.rebuild()));
     await Promise.all(contexts.map((ctx) => ctx.dispose()));
-    console.log('Build complete.');
+    console.log("Build complete.");
   }
+}
+
+function watchBootstrapContent() {
+  const watcher = chokidar.watch(
+    [path.resolve("**/*.php"), path.resolve(`${SRC_DIR}/**/*.{js,css}`)],
+    {
+      ignored: [
+        path.resolve("node_modules/**"),
+        path.resolve("vendor/**"),
+        path.resolve(`${DIST_DIR}/**`),
+      ],
+      ignoreInitial: true,
+    },
+  );
+
+  let timer;
+  watcher.on("all", () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      BuildBootstrap().catch((err) =>
+        console.error("Bootstrap rebuild failed:", err),
+      );
+    }, 150);
+  });
 }
 
 function relativeOutDir(file) {
@@ -78,24 +109,24 @@ async function copyFile(file) {
 async function buildJsContext(file) {
   return esbuild.context({
     entryPoints: [file],
-    outfile: outPathMinified(file, '.js'),
+    outfile: outPathMinified(file, ".js"),
     bundle: true,
     minify: true,
-    format: 'iife',
-    target: ['es2018'],
+    format: "iife",
+    target: ["es2018"],
     sourcemap: false,
-    logLevel: 'info',
+    logLevel: "info",
   });
 }
 
 async function buildCssContext(file) {
   return esbuild.context({
     entryPoints: [file],
-    outfile: outPathMinified(file, '.css'),
+    outfile: outPathMinified(file, ".css"),
     bundle: true,
     minify: true,
-    loader: { '.css': 'css' },
-    logLevel: 'info',
+    loader: { ".css": "css" },
+    logLevel: "info",
   });
 }
 

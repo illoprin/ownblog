@@ -12,7 +12,11 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "bootstrap": "^5.3.8",
+    "chokidar": "^5.0.0",
     "esbuild": "^0.28.2",
-    "fast-glob": "^3.3.3"
+    "fast-glob": "^3.3.3",
+    "purgecss": "^8.0.0",
+    "sass": "^1.105.1"
   }
 }
