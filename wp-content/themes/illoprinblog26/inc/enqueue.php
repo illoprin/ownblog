@@ -1,51 +1,43 @@
-<?
+<?php
 
-/**
- * Returns the version of a file based on the time it was last modified.
- * Used for automatic cache busting.
- */
 function lp_asset_version($relative_path) {
   $file_path = get_template_directory() . $relative_path;
-  return file_exists($file_path) ? filemtime($file_path) : '1.0.0';
+
+  if (is_file($file_path)) {
+    return (string) filemtime($file_path);
+  }
+
+  return (string) wp_get_theme()->get('Version');
 }
 
 function lp_enqueue_style() {
 
-  // fonts
-  wp_enqueue_style(
-    'main-style',
-    get_template_directory_uri() . '/style.css',
-    array(),
-    lp_asset_version('/style.css')
-  );
-
   wp_enqueue_style(
     'bootstrap',
     get_template_directory_uri() . '/assets/dist/css/bootstrap.min.css',
-    array(),
-    lp_asset_version('/assets/dist/css/bootstrap.min.css')
+    array('fonts'),
+    lp_asset_version('/assets/dist/css/bootstrap.min.css'),
   );
+
   wp_enqueue_style(
     'bootstrap-icons',
-    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css'
+    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css',
+    array(),
+    '1.13.1'
   );
+
+  wp_enqueue_style(
+    'fonts',
+    get_template_directory_uri() . '/fonts.css',
+    array(),
+    lp_asset_version('/fonts.css'),
+  );
+
   wp_enqueue_style(
     'main',
     get_template_directory_uri() . '/assets/dist/css/style.min.css',
-    array(),
-    lp_asset_version('/assets/dist/css/style.min.css')
-  );
-  wp_enqueue_style(
-    'bg',
-    get_template_directory_uri() . '/assets/dist/css/bg.min.css',
-    array(),
-    lp_asset_version('/assets/dist/css/bg.min.css')
-  );
-  wp_enqueue_style(
-    'archive-portfolio',
-    get_template_directory_uri() . '/assets/dist/css/archive-portfolio.min.css',
-    array(),
-    lp_asset_version('/assets/dist/css/archive-portfolio.min.css')
+    array('fonts', 'bootstrap'),
+    lp_asset_version('/assets/dist/css/style.min.css'),
   );
 
 
@@ -54,8 +46,8 @@ function lp_enqueue_style() {
     wp_enqueue_style(
       'landing',
       get_template_directory_uri() . '/assets/dist/css/landing.min.css',
-      array(),
-      lp_asset_version('/assets/dist/css/landing.min.css')
+      array('main'),
+      lp_asset_version('/assets/dist/css/landing.min.css'),
     );
   }
   // single portfolio
@@ -63,8 +55,8 @@ function lp_enqueue_style() {
     wp_enqueue_style(
       'single-portfolio',
       get_template_directory_uri() . '/assets/dist/css/single-portfolio.min.css',
-      array(),
-      lp_asset_version('/assets/dist/css/single-portfolio.min.css')
+      array('main'),
+      lp_asset_version('/assets/dist/css/single-portfolio.min.css'),
     );
   }
 }
@@ -180,11 +172,45 @@ function lp_enqueue_scripts() {
   );
 }
 
+function lp_make_styles_async($html, $handle, $href, $media) {
+  // specify style slugs that should be loaded async
+  $async_handles = array('bootstrap-icons', 'fonts');
+
+  if (in_array($handle, $async_handles, true) && ! is_admin()) {
+    $html = sprintf(
+      '<link rel="preload" id="%s-css" href="%s" as="style" media="%s" onload="this.onload=null;this.rel=\'stylesheet\'">' .
+        '<noscript><link rel="stylesheet" id="%s-css-ns" href="%s" media="%s"></noscript>' . "\n",
+      esc_attr($handle),
+      esc_url($href),
+      esc_attr($media),
+      esc_attr($handle),
+      esc_url($href),
+      esc_attr($media)
+    );
+  }
+
+  return $html;
+}
+
+
+function lp_add_cdn_preconnect($urls, $relation_type) {
+  if ('preconnect' === $relation_type) {
+    $urls[] = array(
+      'href' => 'https://cdn.jsdelivr.net',
+      'crossorigin' => 'anonymous',
+    );
+  }
+
+  return $urls;
+}
+
 function my_custom_body_classes($classes) {
   $classes[] = 'font-primary';
   return $classes;
 }
 
+add_filter('style_loader_tag', 'lp_make_styles_async', 10, 4);
+add_filter('wp_resource_hints', 'lp_add_cdn_preconnect', 10, 2);
 add_filter('body_class', 'my_custom_body_classes');
 add_action('wp_enqueue_scripts', 'lp_enqueue_style');
 add_action('wp_enqueue_scripts', 'lp_enqueue_scripts');

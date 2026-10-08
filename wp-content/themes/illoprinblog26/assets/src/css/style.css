@@ -1,6 +1,3 @@
-/* ============================================================
-   FONTS (Inter & Unbounded)
-   ============================================================ */
 
 /* ============================================================
    TOKENS  (+ Bootstrap override via CSS vars)
@@ -13,7 +10,7 @@
   --bg-2: #1f1f1f;
   --text: #eaeaea;
   --text-dim: rgba(234, 234, 234, 0.66);
-  
+
   --text-mute: rgba(234, 234, 234, 0.44);
 
   /*  colors*/
@@ -25,7 +22,7 @@
 
   --accent: #e17c33;
   --accent-300: #f0a066;
-  --accent-bg: #e17c333A; /* 0.1 alpha */
+  --accent-bg: #e17c333a; /* 0.1 alpha */
   --accent-border: #e17c3390; /* 0.5 alpha */
 
   --success: #43d17a;
@@ -63,6 +60,243 @@
   --bs-toast-max-width: 35vw;
 }
 
+
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
+
+/* ---------- BACKGROUND FX ---------- */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.3;
+}
+.blob--1 {
+  width: 520px;
+  height: 520px;
+  background: var(--primary);
+  top: -140px;
+  left: -120px;
+  animation: float1 22s ease-in-out infinite;
+}
+.blob--2 {
+  width: 460px;
+  height: 460px;
+  background: var(--accent);
+  top: 38%;
+  right: -160px;
+  opacity: 0.22;
+  animation: float2 26s ease-in-out infinite;
+}
+.blob--3 {
+  width: 600px;
+  height: 600px;
+  background: #1c6fa5;
+  bottom: -220px;
+  left: 35%;
+  opacity: 0.2;
+  animation: float3 30s ease-in-out infinite;
+}
+@keyframes float1 {
+  50% {
+    transform: translate(120px, 90px) scale(1.15);
+  }
+}
+@keyframes float2 {
+  50% {
+    transform: translate(-130px, -70px) scale(1.1);
+  }
+}
+@keyframes float3 {
+  50% {
+    transform: translate(80px, -110px) scale(1.08);
+  }
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 78%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at 50% 30%,
+    #000 20%,
+    transparent 78%
+  );
+}
+/* ============================================================
+   CASES ITEMS
+   ============================================================ */
+
+/* ---------- FILTER BAR ---------- */
+
+.cat-count {
+  margin-left: 0.35rem;
+  opacity: 0.6;
+  font-size: 0.85em;
+}
+
+.cases-meta {
+  text-align: left;
+  color: var(--text-mute);
+  font-size: var(--text-s-dim);
+  margin-bottom: 1rem;
+}
+
+.glass-selector label.btn {
+  /*  flex: 0 0 auto !important;*/
+  font-size: var(--text-s-sm);
+}
+
+.cases-search-box {
+  margin-bottom: 5rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+@media screen and (max-width: 1024px) {
+  .cases-search-box {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   PORTFOLIO | CASES
+   ============================================================ */
+
+.pf-media {
+  aspect-ratio: 16/10;
+}
+
+.pf-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition:
+    transform 0.5s ease,
+    filter 0.4s ease;
+  filter: saturate(0.85) brightness(0.85);
+}
+
+.card-portfolio:hover .pf-media img {
+  transform: scale(1.07);
+  filter: saturate(1) brightness(1);
+}
+
+.pf-category {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  font-size: 0.7rem;
+  font-weight: 600;
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--r-pill);
+  letter-spacing: 0.12rem;
+
+  color: var(--text);
+  text-transform: uppercase;
+  border: 1px solid var(--text-mute);
+  background: rgba(25, 25, 25, 0.3);
+}
+
+.pf-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24, 24, 24, 0.62);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-portfolio:hover .pf-overlay {
+  opacity: 1;
+}
+
+.pf-overlay .btn {
+  transform: translateY(10px);
+}
+
+.card-portfolio:hover .pf-overlay .btn {
+  transform: translateY(0);
+}
+
+.pf-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pf-stat-item {
+  color: var(--text-mute);
+}
+
+.pf-stat-item strong {
+  color: var(--accent);
+  font-size: 1.12rem;
+  font-family: var(--font-alt);
+}
+
+/* ---------- REAL-TIME FILTER TRANSITION ---------- */
+
+.pf-col {
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease);
+}
+.pf-col.pf-anim {
+  opacity: 0;
+  transform: scale(0.94);
+  pointer-events: none;
+}
+.pf-col.pf-hidden {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-col {
+    transition: none;
+  }
+}
+
+/* ---------- EMPTY STATE ---------- */
+
+.cases-empty {
+  display: none;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.cases-empty.is-visible {
+  display: block;
+}
+.cases-empty i {
+  font-size: 2.5rem;
+  color: var(--text-mute);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.cases-empty p {
+  color: var(--text-dim);
+  margin: 0;
+}
+
 /* ============================================================
    BASE
    ============================================================ */
@@ -79,7 +313,7 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-main  );
+  font-family: var(--font-main);
   overflow-x: hidden;
   position: relative;
 }
@@ -91,8 +325,6 @@ body {
   font-family: var(--font-alt);
   letter-spacing: -0.02em;
 }
-
-
 
 /* ============================================================
    ARTICLE 
@@ -115,7 +347,6 @@ article.article-content h5 {
   font-size: 1.25rem;
   margin: 1.66rem 0;
 }
-
 
 /* ============================================================
    TEXT
@@ -158,7 +389,8 @@ article.article-content h5 {
   font-size: var(--text-s-dim);
   line-height: 1.65;
 }
-.text-dim strong,b {
+.text-dim strong,
+b {
   color: var(--text);
   font-weight: 600;
 }
@@ -305,37 +537,36 @@ a {
     transparent 62%
   );
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .spotlight:hover::after {
   opacity: 0.15;
 }
 
-
 /* ============================================================
    TOAST
    ============================================================ */
 
 @keyframes pop-down {
-  0%  {
+  0% {
     transform: translateY(50px);
     opacity: 0;
   }
   70% {
     transform: translateY(-10px);
-    opacity: .7;
+    opacity: 0.7;
   }
 }
 
 @keyframes pop-up {
-  100%  {
+  100% {
     transform: translateY(50px);
     opacity: 0;
   }
   30% {
     transform: translateY(-10px);
-    opacity: .7;
+    opacity: 0.7;
   }
 }
 
@@ -356,11 +587,11 @@ a {
 
 .toast.show {
   pointer-events: all;
-  animation: pop-down .3s ease-in normal;
+  animation: pop-down 0.3s ease-in normal;
 }
 
 .toast.hide {
-  animation: pop-up .3s ease-in normal;
+  animation: pop-up 0.3s ease-in normal;
 }
 
 .toast-row {
@@ -393,7 +624,8 @@ a {
   color: var(--success-border);
 }
 
-.toast-success b,.toast-success .toast-icon {
+.toast-success b,
+.toast-success .toast-icon {
   color: var(--success-300);
 }
 
@@ -426,7 +658,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.90rem;
+  font-size: 0.9rem;
 }
 .btn:active {
   transform: translateY(2px);
@@ -575,7 +807,7 @@ a {
   inset: 0;
   opacity: 0;
 
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 
 .scroll-progress-container.visible {
@@ -588,8 +820,7 @@ a {
   position: absolute;
   background: var(--accent);
   box-shadow: 0 3px 10px 0 #e17c33bf;
-  transition: width .1s;
-
+  transition: width 0.1s;
 }
 
 /* =======================================
@@ -604,7 +835,6 @@ a {
 }
 
 @media screen and (max-width: 997px) {
-
   .glass-selector label.btn-brand {
     width: 100%;
   }
@@ -620,7 +850,10 @@ a {
   border-color: var(--glass-brd);
   box-shadow: var(--shadow-sm);
   color: var(--text-dim);
-  transition: border-color .3s, color .3s, transform .3s var(--ease);
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    transform 0.3s var(--ease);
 }
 
 .glass-selector label.btn-brand:hover {
@@ -844,7 +1077,7 @@ a {
 }
 .nav-mobile.open {
   display: flex;
-  animation: slide-down .3s ease-out;
+  animation: slide-down 0.3s ease-out;
 }
 
 @keyframes slide-down {
@@ -971,7 +1204,7 @@ a {
   display: block;
   overflow: hidden;
   transition:
-    transform .3s ease,
+    transform 0.3s ease,
     border-color 3s ease,
     box-shadow 3s ease;
 }
@@ -1030,7 +1263,6 @@ a {
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-
 
 /* ============================================================
    10. CONTACT
@@ -1092,7 +1324,6 @@ a {
   background: rgba(255, 255, 255, 0.06);
 }
 
-
 /* ============================================================
    FORM
    ============================================================ */
@@ -1132,7 +1363,7 @@ a {
 .form-check {
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: center; 
+  align-items: center;
   column-gap: 0.86rem;
   row-gap: 0.3rem;
   padding: 0;
@@ -1154,7 +1385,10 @@ a {
   margin: 0 !important;
   cursor: pointer;
 
-  transition: background-color .3s, box-shadow .3s, border-color .3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s,
+    border-color 0.3s;
 }
 
 .form-check-input:checked {
@@ -1170,7 +1404,7 @@ a {
 }
 
 .form-check-input.is-invalid:checked {
-  background-color: var(--accent);  
+  background-color: var(--accent);
 }
 
 .form-check-input.is-invalid:focus {
@@ -1183,9 +1417,8 @@ a {
 }
 
 .form-check .invalid-feedback {
-  grid-column: 1 / -1; 
+  grid-column: 1 / -1;
 }
-
 
 /* --------- invalid input --------- */
 
@@ -1232,11 +1465,12 @@ a {
   border-radius: 50px;
   background: var(--glass-bg);
   border: var(--glass-border);
-  padding: var(--text-s-dim) calc(var(--text-s-dim)*1.5);
+  padding: var(--text-s-dim) calc(var(--text-s-dim) * 1.5);
   box-shadow: 0 5px 24px 0 var(--dark-bg);
-  transition: background .3s,
-              border-color .3s,
-              box-shadow .3s;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 /* icon */
@@ -1382,7 +1616,6 @@ a {
   color: var(--text-dim);
 }
 
-
 /* ============================================================
    GALLERY / LIGHTBOX
    ============================================================ */
@@ -1438,7 +1671,9 @@ a {
   padding: 0;
   cursor: pointer;
   background: none;
-  transition: border-color 0.25s ease, opacity 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    opacity 0.25s ease;
   opacity: 0.6;
 }
 .gallery-thumb img,
@@ -1482,7 +1717,7 @@ a {
   backdrop-filter: blur(6px);
   pointer-events: none;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .gallery-lightbox-content {
@@ -1490,7 +1725,7 @@ a {
   max-width: 1100px;
   max-height: 85vh;
   transform: scale(0.9);
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 .gallery-lightbox-content img,
 .gallery-lightbox-content video {
@@ -1500,7 +1735,6 @@ a {
   border-radius: var(--r-lg);
   display: block;
   margin: 0 auto;
-  
 }
 .gallery-lightbox-close {
   position: absolute;

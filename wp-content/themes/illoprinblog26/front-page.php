@@ -91,39 +91,39 @@ $count = wp_count_posts('portfolio')->publish;
   <section class="marquee-strip" aria-label="Стек технологий">
     <div class="marquee">
       <div class="marquee-track marquee-track slow">
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg"
             alt="" />WordPress</span>
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/woocommerce/woocommerce-original.svg"
             alt="" />WooCommerce</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
             alt="" />PHP</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
             alt="" />React</span>
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
             alt="" />TypeScript</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mobx/mobx-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mobx/mobx-original.svg"
             alt="" />MobX</span>
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
             alt="" />Node.js</span>
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
             alt="" />Express</span>
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
             alt="" />PostgreSQL</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
             alt="" />MySQL</span>
-        <span class="tech-item"><img
+        <span class="tech-item"><img loading="lazy" decoding="async"
             src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" />Docker</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg"
             alt="" />Nginx</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
             alt="" />Linux</span>
-        <span class="tech-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+        <span class="tech-item"><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
             alt="" />Figma</span>
       </div>
     </div>

@@ -214,13 +214,6 @@
   flex-wrap: wrap;
   gap: 0.4rem;
 }
-.svc-tags li {
-  font-size: 0.72rem;
-  padding: 0.25rem 0.65rem;
-  color: var(--text-mute);
-  border: 1px solid var(--glass-brd);
-  border-radius: var(--r-pill);
-}
 
 .svc-link i {
   will-change: transition;

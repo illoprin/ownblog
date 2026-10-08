@@ -38,9 +38,9 @@ $post_id     = $args['post_id'] ?? 0;
     <? if (!empty($tags)): ?>
       <ul class="svc-tags list-unstyled">
         <? foreach ($tags as $tag): ?>
-          <div class="badge badge-accent font-alt">
+          <li class="badge badge-accent font-alt">
             <?= esc_html($tag); ?>
-          </div>
+          </li>
         <? endforeach; ?>
       </ul>
     <? endif; ?>
