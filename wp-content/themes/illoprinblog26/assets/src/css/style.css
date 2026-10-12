@@ -1074,6 +1074,8 @@ a {
   margin-top: 0.6rem;
   padding: 0.5rem;
   background: var(--dark-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 .nav-mobile.open {
   display: flex;

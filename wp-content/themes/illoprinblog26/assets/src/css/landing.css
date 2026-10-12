@@ -250,7 +250,7 @@
   top: 1rem;
   bottom: 1rem;
   left: 50%;
-  width: 1px;
+  width: 2px;
   background: linear-gradient(180deg, transparent, var(--primary-border) 8%, var(--accent-border) 92%, transparent);
 }
 .workflow-item {
@@ -347,13 +347,16 @@
     padding-left: 1.5rem;
   }
   .workflow-list::before {
-    left: 0.4rem;
+    left: 0;
   }
   .workflow-item,
   .workflow-item:nth-child(even),
   .workflow-item:nth-child(odd) {
     width: 100%;
     margin: 0;
+  }
+  .workflow-content {
+    flex-wrap: wrap;
   }
   .workflow-item:nth-child(even)::after,
   .workflow-item:nth-child(odd)::after {
